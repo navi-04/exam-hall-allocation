@@ -60,9 +60,9 @@ h1 {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex; /* Flexbox for vertical alignment */
-    flex-direction: column; /* Stack items vertically */
-    justify-content: space-between; /* Space between image and <p> */
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -138,4 +138,42 @@ h1 {
     .subtitle {
         font-size: 1rem;
     }
+}
+.shivani-image{
+    width: 180px;
+    height: 100%; /* Maintain aspect ratio */
+    object-fit: cover;
+    flex-grow: 1; 
+}
+.naveenraj-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.nishanthi-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    
+}
+.sudeep-image {
+    
+   display: flex;
+   width: 140px;
+   object-fit: cover;
+   object-position: right top;
+}
+
+.nirmala-image { 
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid #0d6efd;
+}
+.nureshma-image {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
 }

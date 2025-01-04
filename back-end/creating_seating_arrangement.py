@@ -1,132 +1,93 @@
-import random
-
-# Predefined registration numbers
-registration_numbers = {
-    "CSE": ["927623bCSE001", "927623bCSE002", "927623bCSE003", "927623bCSE004", "927623bCSE005", "927623bCSE006", "927623bCSE007"],
-    "EEE": ["927623bEEE001", "927623bEEE002", "927623bEEE003", "927623bEEE004", "927623bEEE005", "927623bEEE006", "927623bEEE007"],
-    "CE": ["927623bCE001", "927623bCE002", "927623bCE003", "927623bCE004", "927623bCE005", "927623bCE006", "927623bCE007"],
-    "ECE": ["927623bECE001", "927623bECE002", "927623bECE003", "927623bECE004", "927623bECE005", "927623bECE006", "927623bECE007"]
+# Register numbers for different departments
+register_numbers = {
+    "CSE": ['927623BCS001', '927623BCS002', '927623BCS003', '927623BCS004', '927623BCS005', '927623BCS006', '927623BCS007', '927623BCS008', '927623BCS009', '927623BCS010', '927623BCS011', '927623BCS012', '927623BCS013', '927623BCS014', '927623BCS015', '927623BCS016', '927623BCS017', '927623BCS018', '927623BCS019', '927623BCS020', '927623BCS021', '927623BCS022', '927623BCS023', '927623BCS024', '927623BCS025', '927623BCS026', '927623BCS027', '927623BCS028', '927623BCS029', '927623BCS030', '927623BCS031', '927623BCS032', '927623BCS033', '927623BCS034', '927623BCS035', '927623BCS036', '927623BCS037', '927623BCS038', '927623BCS039', '927623BCS040', '927623BCS041', '927623BCS042'],
+    "MECH": ['927623BME001', '927623BME002', '927623BME003', '927623BME004', '927623BME005', '927623BME006', '927623BME007', '927623BME008', '927623BME009', '927623BME010', '927623BME011', '927623BME012', '927623BME013', '927623BME014', '927623BME015', '927623BME016', '927623BME017', '927623BME018', '927623BME019', '927623BME020', '927623BME021', '927623BME022', '927623BME023', '927623BME024', '927623BME025', '927623BME026', '927623BME027', '927623BME028', '927623BME029', '927623BME030', '927623BME031', '927623BME032', '927623BME033', '927623BME034', '927623BME035', '927623BME036', '927623BME037', '927623BME038', '927623BME039', '927623BME040', '927623BME041'],
+    "AIDS": ['927623BAD001', '927623BAD002', '927623BAD003', '927623BAD004', '927623BAD005', '927623BAD006', '927623BAD007', '927623BAD008', '927623BAD009', '927623BAD010', '927623BAD011', '927623BAD012', '927623BAD013', '927623BAD014', '927623BAD015', '927623BAD016', '927623BAD017', '927623BAD018', '927623BAD019', '927623BAD020', '927623BAD021', '927623BAD022', '927623BAD023', '927623BAD024', '927623BAD025', '927623BAD026', '927623BAD027', '927623BAD028', '927623BAD029', '927623BAD030', '927623BAD031', '927623BAD032', '927623BAD033', '927623BAD034', '927623BAD035', '927623BAD036', '927623BAD037', '927623BAD038', '927623BAD039', '927623BAD040', '927623BAD041'],
+    "CSBS": ['927623BCB001', '927623BCB002', '927623BCB003', '927623BCB004', '927623BCB005', '927623BCB006', '927623BCB007', '927623BCB008', '927623BCB009', '927623BCB010', '927623BCB011', '927623BCB012', '927623BCB013', '927623BCB014', '927623BCB015', '927623BCB016', '927623BCB017', '927623BCB018', '927623BCB019', '927623BCB020', '927623BCB021', '927623BCB022', '927623BCB023', '927623BCB024', '927623BCB025', '927623BCB026', '927623BCB027', '927623BCB028', '927623BCB029', '927623BCB030', '927623BCB031', '927623BCB032', '927623BCB033', '927623BCB034', '927623BCB035', '927623BCB036', '927623BCB037', '927623BCB038', '927623BCB039', '927623BCB040', '927623BCB041']
 }
 
-def get_departments_and_seats():
-    print("Enter the available departments:")
-    available_departments = list(registration_numbers.keys())
-    chosen_departments = []
-    
-    num_departments = int(input(f"How many departments do you want to allocate seats for? (Max {len(available_departments)}): "))
-    if num_departments > len(available_departments):
-        print(f"Error: You can only select up to {len(available_departments)} departments.")
-        return
-    
-    print("Please choose the departments:")
-    for i, dept in enumerate(available_departments):
-        print(f"{i + 1}. {dept}")
-    
-    for i in range(num_departments):
-        chosen_dept = int(input(f"Select department {i + 1}: ")) - 1
-        chosen_departments.append(available_departments[chosen_dept])
+# Hall patterns for seat allocation
+hall_patterns = {
+    "HALL_1": [
+        ["1", "3", "2", "3", "1"],
+        ["2", "4", "1", "4", "2"],
+        ["1", "3", "2", "3", "1"],
+        ["2", "4", "1", "4", "2"],
+        ["1", "3", "2", "3", "1"]
+    ],
+    "HALL_2": [
+        ["4", "1", "3", "2", "4"],
+        ["3", "2", "4", "1", "3"],
+        ["4", "1", "3", "2", "4"],
+        ["3", "2", "4", "1", "3"],
+        ["4", "1", "3", "2", "4"]
+    ],
+    "HALL_3": [
+        ["2", "4", "2", "3", "4"],
+        ["1", "3", "1", "2", "1"],
+        ["2", "4", "4", "3", "4"],
+        ["1", "3", "1", "2", "1"],
+        ["2", "4", "2", "3", "4"]
+    ],
+    "HALL_4": [
+        ["3", "1", "2", "4", "3", "1", "3", "4", "3", "1"],
+        ["2", "4", "3", "1", "2", "4", "3", "1", "2", "4"],
+        ["3", "1", "2", "4", "3", "1", "2", "4", "3", "1"],
+        ["2", "4", "3", "1", "2", "4", "3", "1", "2", "4"],
+        ["3", "1", "2", "4", "3", "1", "2", "4", "3", "1"]
+    ],
+    "HALL_5": [
+        ["4", "3", "4", "3", "4", "3", "4", "3", "4", "3"],
+        ["1", "2", "1", "2", "1", "2", "1", "2", "1", "2"],
+        ["4", "3", "4", "3", "4", "3", "4", "3", "4", "3"],
+        ["1", "2", "1", "2", "1", "2", "1", "2", "1", "2"]
+    ]
+}
 
-    dept_seats = {}
-    for dept in chosen_departments:
-        num_seats = int(input(f"How many seats do you want to allocate for department {dept}? (Max {len(registration_numbers[dept])}): "))
-        dept_seats[dept] = num_seats
+# Mapping of department to its respective number
+department_map = {
+    1: "CSE",
+    2: "MECH",
+    3: "AIDS",
+    4: "CSBS"
+}
 
-    total_hall_capacity = 25  # Fixed to 5x5 (total 25 students)
-    return chosen_departments, dept_seats, total_hall_capacity
+# Function to assign students to halls based on the pattern
+def allocate_seats(register_numbers, hall_patterns):
+    # Create student iterators for each department
+    department_iterators = {
+        department: iter(register_numbers[department]) for department in register_numbers
+    }
 
-def generate_seating_pattern(chosen_departments):
-    rows, cols = 5, 5  # Fixed 5x5 seating pattern
-    dept_queue = list(chosen_departments) * (rows * cols // len(chosen_departments) + 1)
-    random.shuffle(dept_queue)
+    # Store the student allocations for each hall (2D list per hall)
+    hall_allocations = {hall: [['' for _ in range(len(pattern))] for pattern in hall_patterns[hall]] for hall in hall_patterns}
 
-    # Initialize seating pattern (empty 5x5 grid)
-    pattern = [[None] * cols for _ in range(rows)]
-
-    def is_valid_placement(row, col, dept):
-        # Ensure no clashes in columns 1 and 2 (same department should not be next to each other)
-        if (col == 0 and pattern[row][1] == dept) or (col == 1 and pattern[row][0] == dept):
-            return False
+    # Iterate through each hall and its seating pattern
+    for hall_name, pattern in hall_patterns.items():
+        # Fill columns first
+        num_rows = len(pattern)
+        num_cols = len(pattern[0])
         
-        # Ensure no clashes in columns 3 (same department should not be in same row as column 2 or 4)
-        if col == 2 and (pattern[row][1] == dept or pattern[row][3] == dept):
-            return False
-        
-        # Ensure no clashes in columns 4 and 5 (same department should not be next to each other)
-        if (col == 3 and pattern[row][4] == dept) or (col == 4 and pattern[row][3] == dept):
-            return False
+        # Allocate students vertically (column-wise)
+        for col_index in range(num_cols):
+            for row_index in range(num_rows):
+                department_id = int(pattern[row_index][col_index])
+                department = department_map[department_id]
+                
+                # Get the next student for this department
+                student_id = next(department_iterators[department], "No Student")
+                
+                # Allocate student ID to the position in the hall
+                hall_allocations[hall_name][row_index][col_index] = student_id
 
-        # Ensure no diagonal clashes for consecutive rows (X-shape check for columns 1 and 2)
-        if row > 0:
-            if col == 0 and (pattern[row - 1][1] == dept or pattern[row - 1][0] == dept):  # Diagonal for column 1
-                return False
-            if col == 1 and (pattern[row - 1][0] == dept or pattern[row - 1][1] == dept):  # Diagonal for column 2
-                return False
-            if col == 2 and (pattern[row - 1][1] == dept or pattern[row - 1][3] == dept):  # Diagonal for column 3
-                return False
-            if col == 3 and (pattern[row - 1][4] == dept or pattern[row - 1][2] == dept):  # Diagonal for column 4
-                return False
-            if col == 4 and (pattern[row - 1][3] == dept or pattern[row - 1][4] == dept):  # Diagonal for column 5
-                return False
+    return hall_allocations
 
-        # Ensure no vertical clashes (no same department in consecutive rows in the same column)
-        if row > 0:
-            if pattern[row - 1][col] == dept:
-                return False
-        
-        return True
 
-    # Assign departments to the grid based on the above rules
-    for i in range(rows):
-        for j in range(cols):
-            while True:
-                selected_dept = random.choice(dept_queue)
-                if is_valid_placement(i, j, selected_dept):
-                    pattern[i][j] = selected_dept
-                    dept_queue.remove(selected_dept)
-                    break
-    return pattern
+# Allocate seats based on the pattern
+allocations = allocate_seats(register_numbers, hall_patterns)
 
-def creating_seating_arrangement(registration_numbers, pattern, dept_seats):
-    departments = {key.lower(): registration_numbers[key] for key in registration_numbers}
-    hall = []
-
-    # Assign students to the seating arrangement
-    for i, row in enumerate(pattern):
-        hall_row = []
-        for j, department in enumerate(row):
-            department_lower = department.lower()
-            if departments[department_lower] and dept_seats.get(department, 0) > 0:
-                student = departments[department_lower].pop(0)
-                hall_row.append(student)
-                dept_seats[department] -= 1
-            else:
-                hall_row.append(None)
-        hall.append(hall_row)
-
-    return hall, departments
-
-# Main program flow
-chosen_departments, dept_seats, total_hall_capacity = get_departments_and_seats()
-pattern = generate_seating_pattern(chosen_departments)
-
-# Display the generated pattern
-print("\nGenerated Seating Pattern:")
-for row in pattern:
-    print(row)
-
-# Call the function and get the seating arrangement
-seating_arrangement, remaining_departments = creating_seating_arrangement(registration_numbers, pattern, dept_seats)
-
-# Print seating arrangement
-print("\nSeating Arrangement for Hall 1:")
-for row in seating_arrangement:
-    print(row)
-
-# Check if there are remaining students to be seated in another hall
-remaining_students = sum([len(remaining_departments[dept]) for dept in remaining_departments])
-
-if remaining_students > 0:
-    print("\nRemaining Students (Not Allocated a Seat in Hall 1):")
-    for department, students in remaining_departments.items():
-        if students:
-            print(f"{department.upper()}: {students}")
+# Output the seat allocation in the given pattern
+for hall_name, pattern in hall_patterns.items():
+    print(f"\n{hall_name} Allocation:")
+    for row in allocations[hall_name]:
+        print("  " + " ".join(row))

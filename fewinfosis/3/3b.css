@@ -1,0 +1,53 @@
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+  }
+  .services {
+    margin-bottom :450px;
+    background-color: #ffffff;
+    padding: 2em;
+    text-align: center;
+    color:#2c6487;
+   
+  }
+  
+  .projects {
+    background-color: #17568ddd;
+    padding: 2em;
+    text-align: center;
+    color:white;
+  }
+  
+  
+  .h2 {
+    color: #ffffff;
+  }
+  
+  .project-cards {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+    gap: 3em; 
+  }
+  .card1, .card2, .card3 {
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 1em;
+  width: 800px;
+  height: 200px; 
+  box-shadow: 0px 4px 6px rgba(222, 220, 220, 0.1);
+  text-align: center;
+  }
+  
+  .card1 p, .card2 p, .card3 p {
+    font-size: 1em;
+    margin-bottom: 1em;
+    color: #555;
+    align-items:center;
+  }

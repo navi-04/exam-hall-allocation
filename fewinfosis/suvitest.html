@@ -37,6 +37,8 @@
       margin-bottom: 40px;
       font-style: italic;
     }
+   
+
 
     .team-grid {
       display: grid;
@@ -143,7 +145,28 @@
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-    
+.card-container {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: #FFFFFF;
+  color: #124265;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.bottom-center:hover .card-container {
+  display: block; /* Ensure it becomes visible on hover */
+  opacity: 1;
+  transform: translateY(0);
+}
     
 
     @media (max-width: 480px) {
@@ -155,6 +178,36 @@
         font-size: 1rem;
       }
     }
+    /* Sudeep card container styles */
+.team-card {
+  position: relative;
+  width: 200px;
+  overflow: hidden;
+}
+
+.hover-card {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  color: #124265;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Hover animation */
+.team-card:hover .hover-card {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    
   </style>
 </head>
 <body>
@@ -176,9 +229,9 @@
       <div class="team-card bottom-center">
         <img src="images/sudeep.jpg" alt="Sudeep Karuppannan">
         <div class="name">SUDEEP<br>KARUPPANNAN</div>
-        
-        <!-- Hidden Card for Sudeep -->
-        <div class="card-container sudeep-card">
+      
+        <!-- Hidden Card -->
+        <div class="card-container">
           <div class="card-background">
             <div class="card-inner">
               <p class="card-text">
@@ -199,6 +252,7 @@
           </div>
         </div>
       </div>
+      
 
       <div class="team-card bottom-right">
         <img src="images/nirmala.jpg" alt="Nirmala Ramadas">

@@ -44,31 +44,33 @@ h1 {
     width: 100%;
 }
 
-.team-member {
-    text-align: center;
-    background-color: white;
-    width: 180px;
-    height: 260px;
-    padding: 0;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+
+
 
 .team-member:hover {
     transform: scale(1.05);
     box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.3);
 }
 
+.team-member {
+    text-align: center;
+    background-color: white;
+    width: 180px;
+    height: 260px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex; /* Flexbox for vertical alignment */
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Space between image and <p> */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
 .team-member img {
     width: 100%;
-    height: auto;
+    height: auto; /* Maintain aspect ratio */
     object-fit: cover;
-    background-color: white;
+    flex-grow: 1; /* Allow image to expand in the container */
 }
 
 .team-member p {
@@ -79,7 +81,10 @@ h1 {
     padding: 10px 0;
     margin: 0;
     letter-spacing: 1px;
+    text-transform: uppercase;
+    flex-shrink: 0; /* Prevent shrinking of the <p> tag */
 }
+
 
 /* Layout grid areas */
 .center {
@@ -134,27 +139,3 @@ h1 {
         font-size: 1rem;
     }
 }
-.nureshma-image{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    object-position: center;
-    
-    
-
-}
-.nishanthi-image{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    object-position: center;
-
-}
-.sudeep-image{
-    width:100%;
-    height:100%;
-    object-fit: cover;
-    object-position: center;
-
-}
-

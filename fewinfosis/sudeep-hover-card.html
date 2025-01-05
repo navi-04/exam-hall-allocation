@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sudeep Hover Card</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #124265;
+      font-family: "Poppins", sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      position: relative;
+      width: 306px;
+      height: 380px;
+      overflow: hidden;
+      border-radius: 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 20px;
+    }
+
+    .card-container {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 80%;
+      background: #ffffff;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      z-index: 10;
+    }
+
+    .container:hover .card-container {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .card-background {
+      width: 100%;
+      height: 100%;
+      background: #dbefff;
+      border: 2px solid #2487ce;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+    }
+
+    .card-inner {
+      width: 100%;
+      height: auto;
+      background: #f6fafd;
+      border-radius: 20px;
+      padding: 10px;
+      text-align: center;
+      overflow-wrap: break-word;
+    }
+
+    .card-text {
+      font-size: 12px;
+      color: #000000;
+      line-height: 1.6;
+      word-wrap: break-word;
+      text-align: center; /* Makes the text cleaner */
+    }
+
+    .card-icons {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .card-icons img {
+      width: 30px;
+      height: 30px;
+      object-fit: contain;
+    }
+
+    .name {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background-color: #266694;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      padding: 10px 0;
+      text-align: center;
+      z-index: 1;
+      border-radius: 0 0 20px 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Sudeep Image -->
+    <img src="images/sudeep.jpg" alt="Sudeep Karuppannan" class="image">
+
+    <!-- Name -->
+    <div class="name">SUDEEP<br>KARUPPANNAN</div>
+
+    <!-- Hover Card -->
+    <div class="card-container">
+      <div class="card-background">
+        <div class="card-inner">
+          <p class="card-text">
+            Hello 👋<br>
+            I am Sudeep, a BE-CSE student.<br>
+            An integral part of the FewInfos team.<br>
+            Specialized in Python and backend development.<br>
+            Passionate about crafting innovative tech solutions.<br>
+            Committed to excellence and driving impactful results!
+          </p>
+        </div>
+        <div class="card-icons">
+          <img src=".png" alt="Icon 1">
+          <img src=".png" alt="Icon 2">
+          <img src=".png" alt="Icon 3">
+          <img src=".png" alt="Icon 4">
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

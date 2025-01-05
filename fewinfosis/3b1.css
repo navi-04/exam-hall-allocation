@@ -1,0 +1,71 @@
+.positioned-box {
+    position: absolute;
+    left: 107px;
+    top: 601px;
+    width: 1352px;
+    height: 305px;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .shadow-box {
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25),
+      0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25),
+      0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25),
+      0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+  }
+  
+  .blend-mask {
+    width: 100%;
+    height: 100%;
+  }
+  .positioned-image {
+    width: 80%;
+    max-width: 900px;
+    height: auto;
+    margin: 20px 0;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .text-container {
+    position: absolute;
+    left: 304px;
+    top: 91px;
+    width: 1106px;
+    height: 156px;
+  }
+  
+  .description {
+    font-family: "Inter", sans-serif;
+    color: #124265;
+    font-size: 20px;
+    line-height: 3.6;
+  }
+  
+  .title {
+    position: absolute;
+    left: 668px;
+    top: 30px;
+    font-family: "Inter", sans-serif;
+    color: #124265;
+    font-size: 50px;
+    font-weight: 500;
+    transform: translate(-50%);
+    text-transform: uppercase;
+  }
+  

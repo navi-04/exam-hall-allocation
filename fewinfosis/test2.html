@@ -51,7 +51,6 @@
         margin: auto;
       }
 
-<<<<<<< HEAD
       .team-card {
         background-color: white;
         color: #124265;
@@ -62,13 +61,6 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         width: 200px;
       }
-=======
-/* Hover animation */
-.team-card-sudeep:hover .hover-card {
-  opacity: 1;
-  transform: translateY(0);
-}
->>>>>>> 9e97ad443d694b9391493da0340a534acb08b34c
 
       .team-card:hover {
         transform: scale(1.05);
@@ -102,7 +94,6 @@
         flex-direction: column;
       }
 
-<<<<<<< HEAD
       .center {
         grid-area: center;
       }
@@ -175,30 +166,34 @@
           font-size: 1rem;
         }
       }
-      
-      
-  /* Hidden Card Styles */
-  .card-container {
-  position: absolute;
-  top: 100%; /* Place below the team card */
-  left: 50%;
-  transform: translate(-50%, 20px); /* Initially slightly below */
-  width: 306px;
-  height: 380px;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  opacity: 0; /* Hidden initially */
-  transition: opacity 0.3s ease, transform 0.3s ease; /* Smooth fade-in and fade-out */
-  z-index: 10;
-}
+      /* Sudeep card container styles */
+      .team-card {
+        position: relative;
+        width: 200px;
+        overflow: hidden;
+      }
 
-.team-card.bottom-center:hover .card-container {
-  opacity: 1; /* Fade in */
-  transform: translate(-50%, 0); /* Move into view */
-}
+      .hover-card {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        color: #124265;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        padding: 10px;
+        z-index: 10;
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.3s ease, transform 0.3s ease;
+      }
 
-
+      /* Hover animation */
+      .team-card:hover .hover-card {
+        opacity: 1;
+        transform: translateY(0);
+      }
     </style>
   </head>
   <body>
@@ -240,30 +235,6 @@
                 <img src=".png" alt="Icon 3" />
                 <img src=".png" alt="Icon 4" />
               </div>
-=======
-      <div class="team-card-sudeep team-card bottom-center">
-        <img src="images/sudeep.jpg" alt="Sudeep Karuppannan">
-        <div class="name">SUDEEP<br>KARUPPANNAN</div>
-      
-        <!-- Hidden Card -->
-        <div class="card-container hover-card">
-          <div class="card-background">
-            <div class="card-inner">
-              <p class="card-text">
-                Hello👋<br>
-                I am Sudeep, a BE-CSE student.<br>
-                An integral part of the FewInfos team.<br>
-                Specialized in Python and backend development.<br>
-                Passionate about crafting innovative tech solutions.<br>
-                Committed to excellence and driving impactful results!
-              </p>
-            </div>
-            <div class="card-icons">
-              <img src=".png" alt="Icon 1">
-              <img src=".png" alt="Icon 2">
-              <img src=".png" alt="Icon 3">
-              <img src=".png" alt="Icon 4">
->>>>>>> 9e97ad443d694b9391493da0340a534acb08b34c
             </div>
           </div>
         </div>

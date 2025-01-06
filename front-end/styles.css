@@ -1,3 +1,74 @@
-h1 {
-    color: red;
-}
+/* Card Container */
+.card-flip-container {
+    perspective: 1000px; /* Adds depth for the 3D effect */
+    width: 300px;
+    height: 400px;
+  }
+  
+  /* Inner Container */
+  .card-flip-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Ensures 3D rotation effect */
+  }
+  
+  /* Flip on Hover */
+  .card-flip-container:hover .card-flip-inner {
+    transform: rotateY(180deg);
+  }
+  
+  /* Front and Back Styles */
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden; /* Hides the back side when flipped */
+  }
+  
+  /* Front Side Style */
+  .card-front {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Back Side Style */
+  .card-back {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #004080;
+    color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: rotateY(180deg);
+  }
+  
+  /* Card Content Text */
+  .card-text {
+    padding: 20px;
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  /* Icons */
+  .card-icons {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  
+  .card-icons img {
+    width: 40px;
+    height: 40px;
+    filter: brightness(0) invert(1); /* Makes icons white */
+  }
+  

@@ -11,15 +11,12 @@ html {
 
 
 /* ---------------navbar---------------- */
-
 .home-navbar-unique {
   background-color: #003366;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  padding: 10px 20px;
+  padding-bottom: 30px;
   color: white;
-  height: 80px;
+  height: 100px;
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -40,9 +37,46 @@ html {
 
 .home-navbar-unique a:hover {
   background-color: #0056b3;
-  }
-.home-logo-unique{
+}
+
+.home-logo-unique {
   height: 60px;
+  width: auto;
+}
+
+.navbar-toggler {
+  border-color: rgb(255, 255, 255);
+}
+
+.navbar-toggler-icon {
+  background-color: rgb(255, 255, 255);
+
+}
+
+.nav-item{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+.nav-link{
+  color: white !important;
+}
+.navbar-nav .nav-item .nav-link {
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #cce7ff !important;
+}
+
+.navbar-collapse {
+  background-color: #003366; /* Set the background color of the appearing box */
+  padding-left: 10px; 
+  padding-top: 10px;
+  border-radius: 5px; /* Optional: add rounded corners */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
 }
 
 /* ----------------end navbar------------------- */

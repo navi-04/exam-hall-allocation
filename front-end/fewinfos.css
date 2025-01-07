@@ -75,8 +75,7 @@ html {
   background-color: #003366; /* Set the background color of the appearing box */
   padding-left: 10px; 
   padding-top: 10px;
-  border-radius: 5px; /* Optional: add rounded corners */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Optional: shadow for better visibility */
+  border-radius: 5px; 
 }
 
 /* ----------------end navbar------------------- */

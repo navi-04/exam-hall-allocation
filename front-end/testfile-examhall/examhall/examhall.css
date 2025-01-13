@@ -1,181 +1,120 @@
+/* Custom CSS */
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
 }
 
-/* Navbar */
 .navbar {
-    background-color: #043a66; /* Metallic Blue */
-    padding: 10px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  background-color:#003366;
+  padding: 1px 20px;
 }
 
-/* Logo Styling */
-.home-logo-unique {
-    height: 60px;
-    width: auto;
+.navbar-brand img {
+  height: 70px;
 }
 
-/* Navigation Links */
-.navbar ul {
-    list-style: none;
-    display: flex;
-    gap: 60px; /* Consistent spacing between items */
-    margin: 0; /* Remove default list margin */
-    padding: 0; /* Remove padding */
+.navbar-nav .nav-link {
+  margin: 0 15px; /* Adds spacing between the links */
+  color: #ffffff !important; /* Keeps the links white */
+  font-weight: 500;
+  font-size: 16px;
+}
+.navbar-nav {
+  display: flex;
+  justify-content: space-between; /* Adds equal space between items */
+  align-items: center; /* Vertically centers items */
+  flex-grow: 1; /* Ensures it takes up available space */
+  margin: 0 20px; /* Adds spacing on the left and right of the navbar */
 }
 
-.navbar ul li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 18px; /* Increased font size */
-    transition: text-shadow 0.3s ease, color 0.3s ease;
-}
 
-.navbar ul li a:hover {
-    text-shadow: 
-        0 0 10px rgba(255, 215, 0, 0.8), 
-        0 0 20px rgba(255, 215, 0, 0.6), 
-        0 0 30px rgba(255, 215, 0, 0.4), 
-        0 0 40px rgba(255, 215, 0, 0.3); 
-    color: #dce6f0;
-    animation: glitter 1s infinite alternate;
-}
-
-/* Glitter Animation */
-@keyframes glitter {
-    0% {
-        text-shadow: 
-            0 0 10px rgba(255, 215, 0, 0.8), 
-            0 0 20px rgba(255, 215, 0, 0.6), 
-            0 0 30px rgba(255, 215, 0, 0.4), 
-            0 0 40px rgba(255, 215, 0, 0.3);
-    }
-    100% {
-        text-shadow: 
-            0 0 20px rgba(255, 215, 0, 0.9), 
-            0 0 30px rgba(255, 215, 0, 0.7), 
-            0 0 40px rgba(255, 215, 0, 0.5), 
-            0 0 50px rgba(255, 215, 0, 0.4);
-    }
-}
-
-/* Search Bar */
 .search-bar {
-    display: flex;
-    align-items: center;
-    width: 25%;
+  display: flex;
+   /* Centers the search bar horizontally */
+  flex-grow: 1;           /* Allows it to expand within the navbar */
+  max-width: 400px;
+  margin-left: auto;      /* Ensures centering */
+  margin-right: 0;
+  
+
 }
 
 .search-bar input {
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    width: 100%; /* Full width within the container */
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  font-size: 14px;
+  align-items: center;
+  
 }
 
-/* Main Content */
-.navbar-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: calc(100vh - 70px); /* Adjust based on navbar height */
-    text-align: center;
-    padding: 20px; /* Add padding for better readability */
+.search-bar input::placeholder {
+  color: #aaa;
 }
 
-.navbar-content h1 {
-    font-size: 24px;
-    color: #4682b4;
-    line-height: 1.5;
+.navbar-toggler {
+  border: none;
+  margin-right: auto;
 }
-/* home page content */
+
 .home-content {
-    background-color: #17568d;
-    padding: 4em 2em;
-    text-align: center;
-    color: white;
-  }
-  
-  .home-content h2 {
-    font-size: 2.5em;
-    margin-bottom: 0.5em;
-  }
-  
-  .home-content p {
-    font-size: 1.2em;
-    line-height: 1.6;
-    margin-bottom: 2em;
-  }
-  
-  .examhall-cards {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2.5em;
-    margin: 0 auto;
-    width: 90%;
-    max-width: 1200px;
-  }
-  
-  .examhall-card-unique {
-    position: relative;
-    border-radius: 20px;
-    overflow: hidden;
-    width: 1100px;
-    height: 200px;
-    display: flex;
-    align-items: center;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
-    background-color: #ffffff;
-    transition: transform 0.5s ease, box-shadow 0.5s ease;
-  }
-  
-  .examhall-card-unique:hover{
-    transform: scale(1.05);
-    box-shadow: 0 0 16px 4px rgb(34, 135, 229);
-  }
-  
-  .examhall-card-unique .examhall-image-container {
-    flex: 1;
-    height: 100%;
-    overflow: hidden;
-  }
-  
-  .examhall-card-unique .examhall-image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  
-  .examhall-card-unique .examhall-content {
-    padding-left: 20px;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: left;
-    color: #333;
-  }
-  
-  .examhall-card-unique .examhall-content h3 {
-    font-size: 1.8em;
-    margin-bottom: 0.5em;
-    color: #2c6487;
-  }
-  
-  .examhall-card-unique .examhall-content p {
-    font-size: 1em;
-    line-height: 1.2;
-    color: #555;
-  }
-  
+  text-align: center;
+  padding: 50px 20px;
+  background-color:#23598f;
+}
 
-  
-  /* end of home page content */
+.home-content h2 {
+  color: #ffffff;
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+
+.examhall-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.examhall-card-unique {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px; 
+  text-align: left;
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.examhall-card-unique img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.examhall-content {
+  padding: 15px;
+}
+
+.examhall-content h3 {
+  font-size: 18px;
+  color: #1a1a1a;
+  margin-bottom: 10px;
+}
+
+.examhall-content p {
+  font-size: 14px;
+  color: #555555;
+  line-height: 1.5;
+}
+
+.examhall-card-unique:hover {
+  transform: translateY(-5px);
+}

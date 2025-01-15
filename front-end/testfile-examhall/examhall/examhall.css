@@ -16,26 +16,26 @@ body {
 }
 
 .navbar-nav .nav-link {
-  margin: 0 15px; /* Adds spacing between the links */
-  color: #ffffff !important; /* Keeps the links white */
+  margin: 0 15px; 
+  color: #ffffff !important;
   font-weight: 500;
   font-size: 16px;
 }
 .navbar-nav {
   display: flex;
-  justify-content: space-between; /* Adds equal space between items */
-  align-items: center; /* Vertically centers items */
-  flex-grow: 1; /* Ensures it takes up available space */
-  margin: 0 20px; /* Adds spacing on the left and right of the navbar */
+  justify-content: space-between; 
+  align-items: center; 
+  flex-grow: 1;
+  margin: 0 20px; 
 }
 
 
 .search-bar {
   display: flex;
-   /* Centers the search bar horizontally */
-  flex-grow: 1;           /* Allows it to expand within the navbar */
+  
+  flex-grow: 1;           
   max-width: 400px;
-  margin-left: auto;      /* Ensures centering */
+  margin-left: auto;      
   margin-right: 0;
   
 

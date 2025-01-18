@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hall Layout</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f9fc;
+        }
+
+        .navbar {
+            background-color: #003366;
+            padding: 10px 20px;
+        }
+
+        .navbar-brand img {
+            height: 50px;
+        }
+
+        .navbar-nav .nav-link {
+            margin: 0 15px;
+            color: #ffffff !important;
+            font-weight: 500;
+            font-size: 16px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .content-container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .control-panel, .info-panel {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 25%;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+        }
+
+        .grid-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+
+        .grid-small {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+
+        .grid-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #003366;
+            padding: 10px;
+            background-color: #f0f0f0;
+            color: #003366;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .add-btn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid #0066cc;
+            background-color: #0066cc;
+            color: #ffffff;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .control-panel input, .info-panel input {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        .control-panel button, .info-panel button {
+            padding: 10px 20px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .control-panel button:hover, .info-panel button:hover {
+            background-color: #004a99;
+        }
+
+        .info-panel label, .control-panel label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <a class="navbar-brand" href="#">
+                <img class="home-logo-unique" src="fewinfos_logo.png" alt="Fewinfos Logo" />
+            </a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Allocation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Creation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Declaration</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Main Layout -->
+    <div class="main-container">
+        <h2 class="header">Hall Manager</h2>
+        <div class="content-container">
+            
+
+            <!-- Grid Layout -->
+            <div class="grid-container">
+                <div class="grid-title">ALLOCATION</div>
+                <div class="grid-small">
+                    <div class="grid-item">1</div>
+                    <div class="grid-item">2</div>
+                    <div class="grid-item">3</div>
+                    <div class="grid-item">4</div>
+                    <div class="grid-item">5</div>
+                    <div class="grid-item">6</div>
+                    <div class="grid-item">7</div>
+                    <div class="grid-item">8</div>
+                    <div class="grid-item">9</div>
+                    <div class="grid-item">10</div>
+                    <div class="grid-item">11</div>
+                    <div class="grid-item">12</div>
+                    <div class="grid-item">13</div>
+                    <div class="grid-item">14</div>
+                    <div class="grid-item">15</div>
+                    <div class="grid-item">16</div>
+                    <div class="grid-item">17</div>
+                    <div class="grid-item">18</div>
+                    <div class="grid-item">19</div>
+                    <div class="grid-item">20</div>
+                    <div class="grid-item">21</div>
+                    <div class="grid-item">22</div>
+                    <div class="grid-item">23</div>
+                    <div class="grid-item">24</div>
+                    <div class="grid-item">25</div>
+                </div>
+                <div class="add-btn">Add</div>
+            </div>
+
+            <div class="control-panel">
+                <label for="hall-name">Hall Name:</label>
+                <input type="text" id="hall-name" placeholder="APJ 014">
+
+                <label for="grid-size">Rows & Columns (n x m):</label>
+                <input type="text" id="grid-size" placeholder="5x5">
+
+                <label for="unique-values">Unique Values:</label>
+                <input type="text" id="unique-values" placeholder="4">
+
+                <button>Add</button>
+            </div>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="

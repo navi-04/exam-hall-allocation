@@ -1,251 +1,521 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Exam Seating Layout</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css" rel="stylesheet">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css"
+      rel="stylesheet"
+    />
     <style>
-        /* General styling */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
         }
-
-        body {
-            min-height: 100vh;
-            background: linear-gradient(to bottom, #EEF2FF, #DBEAFE);
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
+      }
 
-        .navbar {
-            background-color: #1e3a8a;
-            padding: 1rem;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+      @keyframes glowPulse {
+        0% {
+          box-shadow: 0 0 5px rgba(30, 58, 138, 0.3),
+            0 0 10px rgba(30, 58, 138, 0.2), 0 0 15px rgba(30, 58, 138, 0.1);
         }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
+        50% {
+          box-shadow: 0 0 10px rgba(30, 58, 138, 0.4),
+            0 0 20px rgba(30, 58, 138, 0.3), 0 0 30px rgba(30, 58, 138, 0.2);
         }
-
-        .nav-search {
-            margin-left: auto;
+        100% {
+          box-shadow: 0 0 5px rgba(30, 58, 138, 0.3),
+            0 0 10px rgba(30, 58, 138, 0.2), 0 0 15px rgba(30, 58, 138, 0.1);
         }
+      }
 
-        .nav-search-input {
-            padding: 0.5rem 1rem;
-            border: 2px solid #1e3a8a;
-            border-radius: 0.5rem;
-            font-size: 1rem;
-            outline: none;
+      @keyframes borderPulse {
+        0% {
+          border-color: rgba(30, 58, 138, 0.6);
+        }
+        50% {
+          border-color: rgba(30, 58, 138, 1);
+        }
+        100% {
+          border-color: rgba(30, 58, 138, 0.6);
+        }
+      }
+
+      @keyframes bounce {
+        0%,
+        100% {
+          transform: scale(1.1);
+        }
+        50% {
+          transform: scale(1.15);
+        }
+      }
+
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateX(-20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+      }
+
+      body {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #eef2ff, #dbeafe);
+        animation: gradientBG 15s ease infinite;
+      }
+
+      .navbar {
+        background-color: #1e3a8a;
+        padding: 1.5rem;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .navbar-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .navbar-search {
+        position: relative;
+        max-width: 300px;
+        width: 100%;
+      }
+
+      .navbar-search-input {
+        width: 100%;
+        padding: 0.8rem 1rem;
+        border: 2px solid white;
+        border-radius: 1.2rem;
+        font-size: 1rem;
+        outline: none;
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+        color: #1e3a8a;
+      }
+
+      .navbar-search-input::placeholder {
+        color: rgba(30, 58, 138, 0.6);
+      }
+
+      .navbar-search-input:focus {
+        box-shadow: 0 4px 12px rgba(255, 255, 255, 0.3);
+        border-color: rgba(255, 255, 255, 0.8);
+        transform: translateY(-2px);
+      }
+
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 2rem;
+        position: relative;
+        min-height: calc(100vh - 80px);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .search-container {
+        margin-top: 8rem;
+        width: 100%;
+        max-width: 500px;
+        transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: fadeInUp 0.8s ease-out;
+      }
+
+      .search-container.active {
+        margin-top: 2rem;
+      }
+
+      .search-input {
+        width: 100%;
+        padding: 1.2rem 1.8rem;
+        border: 2px solid #1e3a8a;
+        border-radius: 1.2rem;
+        font-size: 1.1rem;
+        outline: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .search-input:focus {
+        box-shadow: 0 8px 16px rgba(30, 58, 138, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .content-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        width: 100%;
+        margin-top: 3rem;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        visibility: hidden;
+      }
+
+      .content-container.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        visibility: visible;
+      }
+
+      .seating-layout {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(8px);
+        border-radius: 1.2rem;
+        padding: 2rem;
+        border: 2px solid rgba(30, 58, 138, 0.2);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.6s ease-out;
+        transition: transform 0.3s ease;
+      }
+
+      .seating-layout:hover {
+        transform: translateY(-5px);
+      }
+
+      .row {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+
+      .row:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .row:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .row:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .row:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .row:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+
+      .seat {
+        width: 4rem;
+        height: 5rem;
+        border: 2px solid #1e3a8a;
+        border-radius: 0.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: white;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+
+      .seat:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(30, 58, 138, 0.2);
+      }
+
+      .seat.highlighted {
+        background-color: #1e3a8a;
+        color: white;
+        animation: bounce 2s infinite, glowPulse 2s infinite,
+          borderPulse 2s infinite;
+        border-width: 3px;
+        position: relative;
+        z-index: 1;
+      }
+
+      .seat.highlighted::before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        left: -5px;
+        right: -5px;
+        bottom: -5px;
+        border: 2px solid #1e3a8a;
+        border-radius: 1rem;
+        animation: borderPulse 2s infinite;
+        z-index: -1;
+      }
+
+      .exam-details {
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 1.2rem;
+        padding: 2.5rem;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        animation: slideIn 0.6s ease-out;
+        transition: transform 0.3s ease;
+      }
+
+      .exam-details:hover {
+        transform: translateY(-5px);
+      }
+
+      .exam-details h2 {
+        color: #1e3a8a;
+        margin-bottom: 2rem;
+        font-size: 1.8rem;
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .details-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+      }
+
+      .detail-item {
+        animation: fadeInUp 0.5s ease-out forwards;
+      }
+
+      .detail-item:nth-child(1) {
+        animation-delay: 0.2s;
+      }
+      .detail-item:nth-child(2) {
+        animation-delay: 0.3s;
+      }
+      .detail-item:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+      .detail-item:nth-child(4) {
+        animation-delay: 0.5s;
+      }
+
+      .detail-item p:first-child {
+        color: #6b7280;
+        margin-bottom: 0.8rem;
+        font-size: 1rem;
+      }
+
+      .detail-item p:last-child {
+        color: #1e3a8a;
+        font-weight: 600;
+        font-size: 1.2rem;
+      }
+
+      @keyframes gradientBG {
+        0% {
+          background-position: 0% 50%;
+        }
+        50% {
+          background-position: 100% 50%;
+        }
+        100% {
+          background-position: 0% 50%;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .content-container {
+          grid-template-columns: 1fr;
         }
 
         .search-container {
-            max-width: 500px;
-            margin: 2rem auto;
-            position: relative;
+          margin-top: 4rem;
         }
 
-        .search-input {
-            width: 100%;
-            padding: 0.75rem 1rem 0.75rem 3rem;
-            border: 2px solid #1e3a8a;
-            border-radius: 0.75rem;
-            font-size: 1rem;
-            outline: none;
+        .search-container.active {
+          margin-top: 1rem;
         }
-
-        .seating-layout {
-            max-width: 1000px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(8px);
-            border-radius: 1rem;
-            border: 2px solid rgba(30, 58, 138, 0.2);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .row {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .seat {
-            width: 5rem;
-            height: 6rem;
-            border: 2px solid #1e3a8a;
-            border-radius: 0.75rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            background: white;
-            cursor: pointer;
-        }
-
-        .seat.highlighted {
-            background-color: #1e3a8a;
-            color: white;
-        }
-
-        .exam-details {
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 0.75rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .exam-details h2 {
-            color: #1e3a8a;
-        }
-
-        .details-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-
-        .detail-item p {
-            margin-bottom: 0.5rem;
-        }
-
-        .detail-item p:first-child {
-            color: #6B7280;
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar">
-        <div>Exam Seating Arrangement</div>
-        <div class="nav-search">
-            <input type="text" class="nav-search-input" placeholder="Search for hall...">
-        </div>
+      <div class="navbar-title">SEARCH MODULE</div>
+      
+      <div class="navbar-search">
+        <input
+          type="text"
+          class="navbar-search-input"
+          placeholder="Search for hall"
+        />
+      </div>
     </nav>
 
     <main class="container">
-        <div class="search-container">
-            <input type="text" class="search-input" id="searchInput" placeholder="Enter registration number...">
-        </div>
+      <div class="search-container" id="searchContainer">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Enter your registration number"
+        />
+      </div>
 
-        <div id="examDetails" class="exam-details" style="display: none;">
-            <h2>Exam Details</h2>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <p>Subject</p>
-                    <p id="subject"></p>
-                </div>
-                <div class="detail-item">
-                    <p>Course Code</p>
-                    <p id="courseCode"></p>
-                </div>
-                <div class="detail-item">
-                    <p>Date</p>
-                    <p id="date"></p>
-                </div>
-                <div class="detail-item">
-                    <p>Time</p>
-                    <p id="time"></p>
-                </div>
+      <div class="content-container" id="contentContainer">
+        <div id="seatingLayout" class="seating-layout"></div>
+
+        <div id="examDetails" class="exam-details">
+          <h2>Exam Details</h2>
+          <div class="details-grid">
+            <div class="detail-item">
+              <p>Subject</p>
+              <p id="subject"></p>
             </div>
+            <div class="detail-item">
+              <p>Course Code</p>
+              <p id="courseCode"></p>
+            </div>
+            <div class="detail-item">
+              <p>Date</p>
+              <p id="date"></p>
+            </div>
+            <div class="detail-item">
+              <p>Time</p>
+              <p id="time"></p>
+            </div>
+          </div>
         </div>
-
-        <div id="seatingLayout" class="seating-layout" style="display: none;"></div>
+      </div>
     </main>
 
     <script>
-           const registrationToSeat = {
-    "927623BSC01": { courseCode: "MATBCS", seat: "A1", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
-    "927623BSC02": { courseCode: "MATBCS", seat: "A2", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
-    "927623BSC03": { courseCode: "MATBCS", seat: "A3", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
-    "927623BSC04": { courseCode: "MATBCS", seat: "A4", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
-    "927623BSC05": { courseCode: "MATBCS", seat: "A5", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
-    "927623BSC06": { courseCode: "MATBCS", seat: "A6", subject: "Math", date: "Jan 22, 2024", time: "9:00 AM - 12:00 PM" },
+      const registrationToSeat = {
+        "927623BSC01": {
+          courseCode: "MATBCS",
+          seat: "A1",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC02": {
+          courseCode: "MATBCS",
+          seat: "A2",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC03": {
+          courseCode: "MATBCS",
+          seat: "A3",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC04": {
+          courseCode: "MATBCS",
+          seat: "A4",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC05": {
+          courseCode: "MATBCS",
+          seat: "A5",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC06": {
+          courseCode: "MATBCS",
+          seat: "A6",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623PHY01": {
+          courseCode: "PHY01",
+          seat: "B1",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+        "927623PHY02": {
+          courseCode: "PHY01",
+          seat: "B2",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+        "927623PHY03": {
+          courseCode: "PHY01",
+          seat: "B3",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+      };
 
-    "927623PHY01": { courseCode: "PHY01", seat: "B1", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
-    "927623PHY02": { courseCode: "PHY01", seat: "B2", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
-    "927623PHY03": { courseCode: "PHY01", seat: "B3", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
-    "927623PHY04": { courseCode: "PHY01", seat: "B4", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
-    "927623PHY05": { courseCode: "PHY01", seat: "B5", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
-    "927623PHY06": { courseCode: "PHY01", seat: "B6", subject: "Physics", date: "Jan 23, 2024", time: "10:00 AM - 1:00 PM" },
+      const rows = 5;
+      const seatsPerRow = 6;
 
-    "927623CHE01": { courseCode: "CHE01", seat: "C1", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
-    "927623CHE02": { courseCode: "CHE01", seat: "C2", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
-    "927623CHE03": { courseCode: "CHE01", seat: "C3", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
-    "927623CHE04": { courseCode: "CHE01", seat: "C4", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
-    "927623CHE05": { courseCode: "CHE01", seat: "C5", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
-    "927623CHE06": { courseCode: "CHE01", seat: "C6", subject: "Chemistry", date: "Jan 24, 2024", time: "11:00 AM - 2:00 PM" },
+      function createSeatingLayout(highlightSeat) {
+        const layout = document.getElementById("seatingLayout");
+        layout.innerHTML = "";
 
-    "927623BIO01": { courseCode: "BIO01", seat: "D1", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
-    "927623BIO02": { courseCode: "BIO01", seat: "D2", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
-    "927623BIO03": { courseCode: "BIO01", seat: "D3", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
-    "927623BIO04": { courseCode: "BIO01", seat: "D4", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
-    "927623BIO05": { courseCode: "BIO01", seat: "D5", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
-    "927623BIO06": { courseCode: "BIO01", seat: "D6", subject: "Biology", date: "Jan 25, 2024", time: "1:00 PM - 4:00 PM" },
+        for (let i = 0; i < rows; i++) {
+          const row = document.createElement("div");
+          row.className = "row";
 
-    "927623ENG01": { courseCode: "ENG01", seat: "E1", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" },
-    "927623ENG02": { courseCode: "ENG01", seat: "E2", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" },
-    "927623ENG03": { courseCode: "ENG01", seat: "E3", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" },
-    "927623ENG04": { courseCode: "ENG01", seat: "E4", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" },
-    "927623ENG05": { courseCode: "ENG01", seat: "E5", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" },
-    "927623ENG06": { courseCode: "ENG01", seat: "E6", subject: "English", date: "Jan 26, 2024", time: "2:00 PM - 5:00 PM" }
-};
+          for (let j = 0; j < seatsPerRow; j++) {
+            const seatNumber = `${String.fromCharCode(65 + i)}${j + 1}`;
+            const seat = document.createElement("div");
+            seat.className = `seat ${
+              seatNumber === highlightSeat ? "highlighted" : ""
+            }`;
+            seat.textContent = seatNumber;
+            row.appendChild(seat);
+          }
 
-        const rows = 5;
-        const seatsPerRow = 6;
-
-        function createSeatingLayout(highlightSeat) {
-            const layout = document.getElementById('seatingLayout');
-            layout.innerHTML = '';
-
-            for (let i = 0; i < rows; i++) {
-                const row = document.createElement('div');
-                row.className = 'row';
-
-                for (let j = 0; j < seatsPerRow; j++) {
-                    const seatNumber = `${String.fromCharCode(65 + i)}${j + 1}`;
-                    const seat = document.createElement('div');
-                    seat.className = `seat ${seatNumber === highlightSeat ? 'highlighted' : ''}`;
-                    seat.textContent = seatNumber;
-                    row.appendChild(seat);
-                }
-
-                layout.appendChild(row);
-            }
+          layout.appendChild(row);
         }
+      }
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", (event) => {
+          const regNo = event.target.value;
+          const data = registrationToSeat[regNo];
+          const searchContainer = document.getElementById("searchContainer");
+          const contentContainer = document.getElementById("contentContainer");
 
-        document.getElementById('searchInput').addEventListener('input', (event) => {
-            const regNo = event.target.value;
-            const data = registrationToSeat[regNo];
+          if (data) {
+            searchContainer.classList.add("active");
+            contentContainer.classList.add("active");
 
-            const details = document.getElementById('examDetails');
-            const layout = document.getElementById('seatingLayout');
+            document.getElementById("subject").textContent = data.subject;
+            document.getElementById("courseCode").textContent = data.courseCode;
+            document.getElementById("date").textContent = data.date;
+            document.getElementById("time").textContent = data.time;
 
-            if (data) {
-                details.style.display = 'block';
-                layout.style.display = 'block';
-
-                document.getElementById('subject').textContent = data.subject;
-                document.getElementById('courseCode').textContent = data.courseCode;
-                document.getElementById('date').textContent = data.date;
-                document.getElementById('time').textContent = data.time;
-
-                createSeatingLayout(data.seat);
-            } else {
-                details.style.display = 'none';
-                layout.style.display = 'none';
-            }
+            createSeatingLayout(data.seat);
+          } else {
+            searchContainer.classList.remove("active");
+            contentContainer.classList.remove("active");
+          }
         });
+
+      // Initial seating layout
+      createSeatingLayout();
     </script>
-</body>
+  </body>
 </html>

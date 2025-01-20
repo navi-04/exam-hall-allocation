@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Hall Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f6f9fc;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .panel {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-panel, .right-panel {
+      text-align: center;
+    }
+
+    .grid-preview {
+      display: grid;
+      gap: 0;
+      margin: 10px 0;
+    }
+
+    .grid-preview div {
+      width: 50px;
+      height: 50px;
+      border: 1px solid #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+    }
+
+    .center-panel {
+      text-align: center;
+    }
+
+    .grid-container {
+      display: grid;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .grid-cell {
+      width: 50px;
+      height: 50px;
+      background: #e4e7eb;
+      border: 1px solid #ccc;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .grid-cell input {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      border: none;
+      background: none;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .grid-cell input:focus {
+      outline: none;
+    }
+
+    input {
+      width: 80%;
+      padding: 10px;
+      margin: 5px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    button {
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-button {
+      background-color: #28a745;
+    }
+
+    .add-button:hover {
+      background-color: #218838;
+    }
+
+    .new-hall-button {
+      background-color: #007bff;
+      margin-top: 10px;
+    }
+
+    .new-hall-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Left Panel -->
+    <div class="panel left-panel">
+      <h3>Hall Preview</h3>
+      <div class="grid-preview" id="gridPreview"></div>
+      <p id="hallNamePreview"></p>
+      <button class="new-hall-button" id="newHallButton">+</button>
+    </div>
+
+    <!-- Center Panel -->
+    <div class="panel center-panel">
+      <h3>Hall Name:</h3>
+      <input type="text" id="hallName" placeholder="Enter Hall Name" />
+      <div class="grid-container" id="gridContainer"></div>
+      <button class="add-button" id="addButton">Add</button>
+    </div>
+
+    <!-- Right Panel -->
+    <div class="panel right-panel">
+      <h3>Rows & Cols (n x m):</h3>
+      <input type="text" id="gridSize" placeholder="e.g., 5x5" />
+      <h3>Unique Values:</h3>
+      <input type="text" id="uniqueValues" placeholder="Enter Unique Values" />
+    </div>
+  </div>
+
+  <script>
+    const gridPreview = document.getElementById('gridPreview');
+    const gridContainer = document.getElementById('gridContainer');
+    const gridSizeInput = document.getElementById('gridSize');
+    const uniqueValuesInput = document.getElementById('uniqueValues');
+    const hallNameInput = document.getElementById('hallName');
+    const hallNamePreview = document.getElementById('hallNamePreview');
+    const addButton = document.getElementById('addButton');
+    const newHallButton = document.getElementById('newHallButton');
+
+    // Generate grid dynamically based on inputs
+    function generateGrid(rows, cols, uniqueValues) {
+      gridContainer.innerHTML = '';
+      gridContainer.style.gridTemplateColumns = repeat(${cols}, 1fr);
+
+      const values = Array.from({ length: rows * cols }, (_, i) => (i % uniqueValues) + 1);
+
+      values.forEach((value) => {
+        const cell = document.createElement('div');
+        cell.className = 'grid-cell';
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.value = value;
+
+        input.addEventListener('input', () => {
+          if (!isNaN(input.value)) {
+            input.value = input.value.slice(0, 2); // Limit to 2 digits
+          }
+        });
+
+        cell.appendChild(input);
+        gridContainer.appendChild(cell);
+      });
+    }
+
+    // Add finalized grid to preview
+    addButton.addEventListener('click', () => {
+      gridPreview.innerHTML = '';
+      const inputs = gridContainer.querySelectorAll('input');
+      const [rows, cols] = gridSizeInput.value.split('x').map(Number);
+
+      if (rows && cols) {
+        gridPreview.style.gridTemplateColumns = repeat(${cols}, 1fr);
+        gridPreview.style.gridTemplateRows = repeat(${rows}, 1fr);
+
+        inputs.forEach((input) => {
+          const previewCell = document.createElement('div');
+          previewCell.textContent = input.value || '';
+          previewCell.style.border = '1px solid #000';
+          previewCell.style.display = 'flex';
+          previewCell.style.justifyContent = 'center';
+          previewCell.style.alignItems = 'center';
+          gridPreview.appendChild(previewCell);
+        });
+      }
+
+      hallNamePreview.textContent = hallNameInput.value || 'Unnamed Hall';
+    });
+
+    // Add a new hall
+    newHallButton.addEventListener('click', () => {
+      hallNameInput.value = '';
+      hallNamePreview.textContent = '';
+      gridSizeInput.value = '';
+      uniqueValuesInput.value = '';
+      gridContainer.innerHTML = '';
+      gridPreview.innerHTML = '';
+    });
+
+    // Update grid
+    gridSizeInput.addEventListener('input', () => {
+      const [rows, cols] = gridSizeInput.value.split('x').map(Number);
+      const uniqueValues = parseInt(uniqueValuesInput.value, 10) || 1;
+      if (rows && cols) generateGrid(rows, cols, uniqueValues);
+    });
+
+    uniqueValuesInput.addEventListener('input', () => {
+      const [rows, cols] = gridSizeInput.value.split('x').map(Number);
+      const uniqueValues = parseInt(uniqueValuesInput.value, 10) || 1;
+      if (rows && cols) generateGrid(rows, cols, uniqueValues);
+    });
+  </script>
+
+</body>
+</html>

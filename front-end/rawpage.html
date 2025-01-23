@@ -163,7 +163,7 @@
     // Generate grid dynamically based on inputs
     function generateGrid(rows, cols, uniqueValues) {
       gridContainer.innerHTML = '';
-      gridContainer.style.gridTemplateColumns = repeat(${cols}, 1fr);
+      gridContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
 
       const values = Array.from({ length: rows * cols }, (_, i) => (i % uniqueValues) + 1);
 
@@ -192,8 +192,8 @@
       const [rows, cols] = gridSizeInput.value.split('x').map(Number);
 
       if (rows && cols) {
-        gridPreview.style.gridTemplateColumns = repeat(${cols}, 1fr);
-        gridPreview.style.gridTemplateRows = repeat(${rows}, 1fr);
+        gridPreview.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+        gridPreview.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
 
         inputs.forEach((input) => {
           const previewCell = document.createElement('div');

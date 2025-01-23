@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Hall Allocation - Create and Attendance Modules</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      /* Custom CSS */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f9f9f9;
+      }
+
+      .navbar {
+        background-color: #003366;
+        padding: 1px 20px;
+      }
+
+      .navbar-brand img {
+        height: 70px;
+      }
+
+      .navbar-nav .nav-link {
+        margin: 0 15px;
+        color: #ffffff !important;
+        font-weight: 500;
+        font-size: 16px;
+      }
+
+      .navbar-nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-grow: 1;
+        margin: 0 20px;
+      }
+
+      .search-bar {
+        display: flex;
+        flex-grow: 1;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: 0;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 20px;
+        outline: none;
+        font-size: 14px;
+        align-items: center;
+      }
+
+      .search-bar input::placeholder {
+        color: #aaa;
+      }
+
+      .navbar-toggler {
+        border: none;
+        margin-right: auto;
+      }
+
+      .home-content {
+        text-align: center;
+        padding: 50px 20px;
+        background-color: #23598f;
+      }
+
+      .home-content h2 {
+        color: #ffffff;
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .examhall-cards {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 40px;
+      }
+
+      .examhall-card-unique {
+        background: #ffffff;
+        border: 1px solid #e0e0e0;
+        border-radius: 10px;
+        overflow: hidden;
+        width: 300px;
+        text-align: left;
+        transition: transform 0.3s ease-in-out;
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .examhall-card-unique img {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .examhall-content {
+        padding: 15px;
+      }
+
+      .examhall-content h3 {
+        font-size: 18px;
+        color: #1a1a1a;
+        margin-bottom: 10px;
+      }
+
+      .examhall-content p {
+        font-size: 14px;
+        color: #555555;
+        line-height: 1.5;
+      }
+
+      .examhall-card-unique:hover {
+        transform: translateY(-5px);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img class="home-logo-unique" src="fewinfos_logo.png" alt="Fewinfos Logo" />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <!-- Navigation Links -->
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Allocation</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Creation</a></li>
+            <li class="nav-item"><a class="nav-link" href="#">Declaration</a></li>
+          </ul>
+          <!-- Search Bar -->
+          <div class="search-bar">
+            <input type="text" placeholder="Search" aria-label="Search" />
+          </div>
+        </div>
+      </nav>
+    </div>
+
+    <!-- Main Content Area -->
+    <section class="home-content" id="home-page">
+      <h2>EXAM HALL ALLOCATION</h2>
+
+      <div class="examhall-cards">
+        <!-- Card 1 -->
+        <div class="examhall-card-unique">
+          <div class="examhall-image-container">
+            <img
+              src="module1.png"
+              alt="Exam Hall Allocation"
+            />
+          </div>
+          <div class="examhall-content">
+            <h3>Creating Page</h3>
+            <p>
+              Developing a user-friendly form to input exam details such as
+              exam name, hall number, date, time, and the number of students.
+            </p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="examhall-card-unique">
+          <div class="examhall-image-container">
+            <img
+              src="module3.png"
+              alt="Under Development"
+            />
+          </div>
+          <div class="examhall-content">
+            <h3>Attendance Percentage Module</h3>
+            <p>
+              Adds a feature to record the number of students who attended
+              each exam.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bootstrap JS and Dependencies -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+  </body>
+</html>

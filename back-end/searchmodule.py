@@ -110,7 +110,7 @@ def search_roll_number():
                 seat_num = row.index(roll_number) + 1
                 
                 # Draw visual representation
-                draw_hall_layout(hall_num, row_num, seat_num)
+                draw_hall_layout(hall_num, row_num, seat_num, roll_number)
                 break
         if found:
             break
@@ -119,7 +119,7 @@ def search_roll_number():
         canvas.create_text(200, 200, text="Roll number not found!", font=("Arial", 14), fill="red")
 
 # Function to draw hall layout
-def draw_hall_layout(hall_num, row_num, seat_num):
+def draw_hall_layout(hall_num, row_num, seat_num, roll_number):
     hall_width = 300
     hall_height = 200
     seat_size = 30
@@ -147,6 +147,9 @@ def draw_hall_layout(hall_num, row_num, seat_num):
 
     # Display hall number, row, and seat
     result_label.config(text=f"Roll number found in Hall {hall_num}, Row {row_num}, Seat {seat_num}")
+    
+    # Display the person allocated to the hall
+    allocated_label.config(text=f"Person Allocated: Roll Number {roll_number} - Hall {hall_num}")
 
 # Creating the main window
 root = tk.Tk()
@@ -171,6 +174,10 @@ result_label.pack(pady=20)
 # Create a Canvas widget for drawing the hall layout
 canvas = tk.Canvas(root, width=600, height=400)
 canvas.pack(pady=20)
+
+# Create a label to display the allocated person and hall below the canvas
+allocated_label = tk.Label(root, text="", font=("Arial", 12))
+allocated_label.pack(pady=10)
 
 # Start the Tkinter event loop
 root.mainloop()

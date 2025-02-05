@@ -1,6 +1,4 @@
-import tkinter as tk
-
-# Data for all 12 halls
+# Data for all 12 halls (same as your original data)
 hall_1 = [
     ["927623bcs001", "927623bee001", "927623ece001", "927623bcs002", "927623bee002"],
     ["927623ece002", "927623bcs004", "927623bee003", "927623ece003", "927623bcs005"],
@@ -85,20 +83,14 @@ hall_12 = [
     ["927623bcs117", "927623bee116", "927623ece116", "927623bcs118", "927623bee117"],
     ["927623ece117", "927623bcs119", "927623bee118", "927623ece118", "927623bcs120"]
 ]
-import tkinter as tk
-
-# Data for all 12 halls (same as your original data)
-# [Keep the hall data here...]
 
 # List of all halls
 halls = [hall_1, hall_2, hall_3, hall_4, hall_5, hall_6, hall_7, hall_8, hall_9, hall_10, hall_11, hall_12]
 
 # Function to search the roll number
 def search_roll_number():
-    roll_number = entry.get()
+    roll_number = input("Enter Roll Number: ").strip().lower()  # Convert input to lowercase
     found = False
-    # Clear previous canvas content
-    canvas.delete("all")
     
     # Iterate over the halls and check for the roll number
     for hall_index, hall in enumerate(halls):
@@ -109,75 +101,31 @@ def search_roll_number():
                 row_num = row_index + 1
                 seat_num = row.index(roll_number) + 1
                 
-                # Draw visual representation
-                draw_hall_layout(hall_num, row_num, seat_num, roll_number)
+                # Display the result
+                print(f"Roll number found in Hall {hall_num}, Row {row_num}, Seat {seat_num}")
+                print_hall_layout(hall_num, row_num, seat_num, roll_number)
                 break
         if found:
             break
     if not found:
-        result_label.config(text="Roll number not found!")
-        canvas.create_text(200, 200, text="Roll number not found!", font=("Arial", 14), fill="red")
+        print("Roll number not found!")
 
-# Function to draw hall layout
-def draw_hall_layout(hall_num, row_num, seat_num, roll_number):
-    hall_width = 300
-    hall_height = 200
-    seat_size = 30
-
-    # Create the outer boundary for the hall
-    canvas.create_rectangle(50, 50, 50 + hall_width, 50 + hall_height, outline="black", width=2)
-    
-    # Draw the rows
+# Function to print hall layout
+def print_hall_layout(hall_num, row_num, seat_num, roll_number):
+    print(f"\nHall {hall_num} Layout:")
     for row in range(1, 6):  # There are 5 rows in each hall
         for seat in range(1, 6):  # There are 5 seats in each row
-            x1 = 50 + (seat - 1) * seat_size
-            y1 = 50 + (row - 1) * seat_size
-            x2 = x1 + seat_size
-            y2 = y1 + seat_size
-            canvas.create_rectangle(x1, y1, x2, y2, outline="black", width=1)
-            canvas.create_text(x1 + seat_size / 2, y1 + seat_size / 2, text=f"{row}-{seat}", font=("Arial", 8))
+            if row == row_num and seat == seat_num:
+                print(f"[{roll_number}]", end=" ")
+            else:
+                print(f"[{row}-{seat}]", end=" ")
+        print()
 
-    # Highlight the seat where the roll number was found
-    x1 = 50 + (seat_num - 1) * seat_size
-    y1 = 50 + (row_num - 1) * seat_size
-    x2 = x1 + seat_size
-    y2 = y1 + seat_size
-    canvas.create_rectangle(x1, y1, x2, y2, outline="red", width=2)
-    canvas.create_text(x1 + seat_size / 2, y1 + seat_size / 2, text=f"Roll: {roll_number}", font=("Arial", 10, "bold"), fill="red")
-
-    # Display hall number, row, and seat
-    result_label.config(text=f"Roll number found in Hall {hall_num}, Row {row_num}, Seat {seat_num}")
-    
-    # Display the person allocated to the hall
-    allocated_label.config(text=f"Person Allocated: Roll Number {roll_number} - Hall {hall_num}")
-
-# Creating the main window
-root = tk.Tk()
-root.title("Roll Number Search with Visual Representation")
-
-# Create a label for instructions
-label = tk.Label(root, text="Enter Roll Number:")
-label.pack(pady=10)
-
-# Create an entry widget to input the roll number
-entry = tk.Entry(root, width=30)
-entry.pack(pady=10)
-
-# Create a search button
-search_button = tk.Button(root, text="Search", command=search_roll_number)
-search_button.pack(pady=10)
-
-# Create a label to display the search result
-result_label = tk.Label(root, text="", font=("Arial", 14))
-result_label.pack(pady=20)
-
-# Create a Canvas widget for drawing the hall layout
-canvas = tk.Canvas(root, width=600, height=400)
-canvas.pack(pady=20)
-
-# Create a label to display the allocated person and hall below the canvas
-allocated_label = tk.Label(root, text="", font=("Arial", 12))
-allocated_label.pack(pady=10)
-
-# Start the Tkinter event loop
-root.mainloop()
+# Main program loop
+if __name__ == "__main__":
+    while True:
+        search_roll_number()
+        choice = input("Do you want to search again? (yes/no): ").strip().lower()
+        if choice != "yes":
+            print("Exiting the program.")
+            break

@@ -1,0 +1,201 @@
+ /* General styles */
+ body {
+    font-family: 'Arial', sans-serif;
+    background-color: #e0f7fa; /* Sky Blue Background */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+/* Container for the entire content */
+.container {
+    width: 100%;
+    height: 100vh; /* Full viewport height */
+    background-color: #b0e0e6; /* Powder Blue inside */
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Header styles */
+.header {
+    background-color: #003366;/* Metallic Blue */
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: white;
+    border-radius: 20px 20px 0 0;
+    box-sizing: border-box;
+    animation: slideIn 1s ease-out;
+}
+
+.logo {
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid black;
+    margin-right: 15px;
+}
+
+h1 {
+    font-size: 32px;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+/* Main content layout */
+.content {
+    display: flex;
+    padding: 30px;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    flex-grow: 1;
+    overflow-y: auto;
+    min-height: 0; /* Ensures proper layout of content */
+}
+
+/* Left panel with input fields */
+.left-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 48%;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input-box {
+    width: 100%;
+    height: 50px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    transition: border 0.3s ease;
+}
+
+.input-box:focus {
+    border: 1px solid #3b6e8b;
+    outline: none;
+}
+
+/* Buttons Styling */
+.notify-btn, .reset-btn, .download-btn {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    color: white;
+    border: none;
+    background-color: #3b6e8b;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.notify-btn:hover, .reset-btn:hover, .download-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #3b6e8b;
+}
+
+.notify-btn:active, .reset-btn:active, .download-btn:active {
+    transform: scale(1.02);
+}
+
+.notify-btn {
+    background-color: #4CAF50;
+}
+
+.reset-btn {
+    background-color: #f44336;
+}
+
+.download-btn {
+    background-color: #2196F3;
+    width: auto;
+    padding: 8px 16px; /* Smaller button size */
+    font-size: 14px; /* Smaller font size */
+}
+
+/* Right panel styles */
+.right-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 48%;
+}
+
+/* Dropdown menu */
+.dropdown {
+    width: 100%;
+    height: 50px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #f9f9f9;
+}
+
+/* Table styles */
+.table-placeholder {
+    width: 100%;
+    height: 300px;
+    border: 1px solid #ccc;
+    background-color: white;
+    padding: 10px;
+    overflow: auto;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ccc;
+    padding: 15px;
+    text-align: center;
+    font-size: 16px;
+}
+
+th {
+    background-color: #f1f1f1;
+}
+
+.label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Centering elements */
+.download-btn-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 30px 0;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes slideIn {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}

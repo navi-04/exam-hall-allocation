@@ -6,60 +6,74 @@ body {
   background-color: #f9f9f9;
 }
 
-.navbar {
-  background-color:#003366;
-  padding: 1px 20px;
-}
 
-.navbar-brand img {
-  height: 70px;
-}
+/* -------------------------navbar---------------- */
 
-.navbar-nav .nav-link {
-  margin: 0 15px; 
-  color: #ffffff !important;
-  font-weight: 500;
-  font-size: 16px;
-}
-.navbar-nav {
-  display: flex;
-  justify-content: space-between; 
-  align-items: center; 
-  flex-grow: 1;
-  margin: 0 20px; 
-}
-
-
-.search-bar {
-  display: flex;
-  
-  flex-grow: 1;           
-  max-width: 400px;
-  margin-left: auto;      
-  margin-right: 0;
-  
-
-}
-
-.search-bar input {
+.home-navbar-unique {
+  background-color: #003366;
+  padding: 10px 20px;
+  padding-bottom: 30px;
+  color: white;
+  height: 100px;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  padding: 8px 12px;
-  border: none;
-  border-radius: 20px;
-  outline: none;
-  font-size: 14px;
-  align-items: center;
-  
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 1);
 }
 
-.search-bar input::placeholder {
-  color: #aaa;
+.home-navbar-unique a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.home-navbar-unique a:hover {
+  background-color: #0056b3;
+}
+
+.home-logo-unique {
+  height: 60px;
+  width: auto;
 }
 
 .navbar-toggler {
-  border: none;
-  margin-right: auto;
+  border-color: rgb(255, 255, 255);
 }
+
+
+.nav-item{
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+}
+
+.nav-link{
+  color: white !important;
+}
+.navbar-nav .nav-item .nav-link {
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  color: #cce7ff !important;
+}
+
+.navbar-collapse {
+  background-color: #003366; /* Set the background color of the appearing box */
+  padding-left: 10px; 
+  padding-top: 10px;
+  border-radius: 5px; 
+}
+
+/* ---------------------------end navbar-------------------  */
+
 
 .home-content {
   text-align: center;

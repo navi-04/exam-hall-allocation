@@ -64,11 +64,11 @@ body {
 .home-content {
   text-align: center;
   padding: 50px 20px;
-  background-color:#23598f;
+  background-color:#97c7f7;
 }
 
 .home-content h2 {
-  color: #ffffff;
+  color: #003366;
   font-size: 36px;
   margin-bottom: 20px;
 }
@@ -89,7 +89,7 @@ body {
   width: 300px; 
   text-align: left;
   transition: transform 0.3s ease-in-out;
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 15px #003366;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 

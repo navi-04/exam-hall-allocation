@@ -3,53 +3,56 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Exam Hall Allocation - Search Module</title>
+    <title>Student Dashboard</title>
     <!-- Bootstrap CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/StudentDashboard.css">
+    <link rel="stylesheet" href="styles/StaffDashboard.css">
+   
   </head>
   <body>
     <!-- Navigation Bar -->
-    <div class="navbar">
+    <div class="home-navbar-unique">
       <nav class="navbar navbar-expand-lg navbar-dark">
-        <a class="navbar-brand" href="#">
-          <img class="home-logo-unique" src="images/fewinfos_logo.png" alt="Fewinfos Logo" />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <!-- Navigation Links -->
-          <ul class="navbar-nav">
-            <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Allocation</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Creation</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Declaration</a></li>
-          </ul>
-          <!-- Search Bar -->
-          <div class="search-bar">
-            <input type="text" placeholder="Search" aria-label="Search" />
+          <a class="navbar-brand" href="#">
+              <img class="home-logo-unique" src="images/fewinfos_logo.png" alt="Fewinfos Logo">
+          </a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="#home-page">Home</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#team-page">Team</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#services-page">Services</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#projects-page">Projects</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#about-page">About</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="#contact-page">Contact</a>
+                  </li>
+              </ul>
           </div>
-        </div>
       </nav>
-    </div>
+  </div>
 
     <!-- Main Content Area -->
     <section class="home-content" id="home-page">
-      <h2>EXAM HALL ALLOCATION </h2>
+      <h2>EXAM HALL ALLOCATION</h2>
 
       <div class="examhall-cards">
+
         <!-- Card 2 -->
         <div class="examhall-card-unique">
           <div class="examhall-image-container">
@@ -69,9 +72,23 @@
       </div>
     </section>
 
+    <div class="footer-bottom">
+      <p>&copy; 2025 Fewinfos. All rights reserved.</p>
+    </div>
+
     <!-- Bootstrap JS and Dependencies -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    const menuItems = document.querySelectorAll('.nav-item');
+    const toggleMenu = document.getElementById('navbarNav');
+    
+    menuItems.forEach(item => {
+      item.addEventListener('click', () => {
+        toggleMenu.classList.remove('show');
+      });
+    });
+    </script>
   </body>
 </html>

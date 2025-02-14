@@ -9,63 +9,70 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/StaffDashboard.css">
-   
+    <link rel="stylesheet" href="styles/StaffDashboard.css" />
   </head>
   <body>
     <!-- Navigation Bar -->
     <div class="home-navbar-unique">
       <nav class="navbar navbar-expand-lg navbar-dark">
-          <a class="navbar-brand" href="#">
-              <img class="home-logo-unique" src="images/fewinfos_logo.png" alt="Fewinfos Logo">
-          </a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
-              <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="#home-page">Home</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#team-page">Team</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#services-page">Services</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#projects-page">Projects</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#about-page">About</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="#contact-page">Contact</a>
-                  </li>
-              </ul>
-          </div>
+        <a class="navbar-brand" href="#">
+          <img
+            class="home-logo-unique"
+            src="images/fewinfos_logo.png"
+            alt="Fewinfos Logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#home-page">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#team-page">Team</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#services-page">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects-page">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#about-page">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#contact-page">Contact</a>
+            </li>
+          </ul>
+        </div>
       </nav>
-  </div>
+    </div>
 
     <!-- Main Content Area -->
     <section class="home-content" id="home-page">
       <h2>EXAM HALL ALLOCATION</h2>
 
       <div class="examhall-cards">
-
         <!-- Card 2 -->
         <div class="examhall-card-unique">
           <div class="examhall-image-container">
-            <img
-              src="images/module2.png"
-              alt="Under Development"
-            />
+            <img src="images/module2.png" alt="Under Development" />
           </div>
           <div class="examhall-content">
             <h3>Search Module</h3>
             <p>
-              Implementing a search bar allowing users to filter allocated
-              halls based on exam name, date, or hall number.
+              Implementing a search bar allowing users to filter allocated halls
+              based on exam name, date, or hall number.
             </p>
           </div>
         </div>
@@ -81,14 +88,14 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    const menuItems = document.querySelectorAll('.nav-item');
-    const toggleMenu = document.getElementById('navbarNav');
-    
-    menuItems.forEach(item => {
-      item.addEventListener('click', () => {
-        toggleMenu.classList.remove('show');
+      const menuItems = document.querySelectorAll(".nav-item");
+      const toggleMenu = document.getElementById("navbarNav");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          toggleMenu.classList.remove("show");
+        });
       });
-    });
     </script>
   </body>
 </html>

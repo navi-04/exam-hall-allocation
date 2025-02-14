@@ -202,8 +202,19 @@
           }
         });
 
+
+
       // Initial seating layout
       createSeatingLayout();
+
+      const menuItems = document.querySelectorAll('.nav-item');
+const toggleMenu = document.getElementById('navbarNav');
+
+menuItems.forEach(item => {
+  item.addEventListener('click', () => {
+    toggleMenu.classList.remove('show');
+  });
+});
     </script>
   </body>
 </html>

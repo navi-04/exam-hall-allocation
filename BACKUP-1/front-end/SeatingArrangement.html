@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Royal Seating Layout</title>
+    <link rel="stylesheet" href="styles/SeatingArrangement.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="home-navbar-unique">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img
+            class="home-logo-unique"
+            src="images/fewinfos_logo.png"
+            alt="Fewinfos Logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="SeatingArrangement.html">Create</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="searchmodule.html">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AttendanceModule.html">Attendance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="background-color: rgb(233, 97, 97);" href="login.html">logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="header">
+      <div class="container">
+        <div class="grid">
+          <div class="panel animate-fade-in">
+            <h3 class="section-title">Hall Configuration</h3>
+            <input
+              type="text"
+              class="input-field"
+              id="hallName"
+              placeholder="Enter Hall Name"
+            />
+            <div id="seatsGrid" class="seats-grid"></div>
+            <button class="button" id="addHall" disabled>Add Hall</button>
+          </div>
+          <div class="panel animate-fade-in">
+            <div>
+              <label class="section-title">Rows & Columns</label>
+              <input
+                type="text"
+                class="input-field"
+                id="gridSize"
+                placeholder="e.g., 5x5"
+              />
+            </div>
+            <div>
+              <label class="section-title">Unique Values</label>
+              <input
+                type="text"
+                class="input-field"
+                id="uniqueValues"
+                placeholder="Enter Unique Values"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="preview-section">
+      <div class="container">
+        <h3 class="hall-preview">
+          Hall Preview
+          <button class="add-new-button" id="resetButton" title="Start New">
+            X
+          </button>
+        </h3>
+        <div class="preview-container" id="previewContainer"></div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; 2025 Fewinfos. All rights reserved.</p>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      let grid = [];
+      let previews = [];
+
+      const chairIcon = `
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="#003366">
+                <path d="M20 8V6C20 4.34315 18.6569 3 17 3H7C5.34315 3 4 4.34315 4 6V8C2.89543 8 2 8.89543 2 10V16C2 17.1046 2.89543 18 4 18H20C21.1046 18 22 17.1046 22 16V10C22 8.89543 21.1046 8 20 8Z"/>
+                <path d="M4 18V20C4 20.5523 4.44772 21 5 21H7C7.55228 21 8 20.5523 8 20V18M16 18V20C16 20.5523 16.4477 21 17 21H19C19.5523 21 20 20.5523 20 20V18"/>
+            </svg>
+        `;
+
+      function resetAll() {
+        document.getElementById("hallName").value = "";
+        document.getElementById("gridSize").value = "";
+        document.getElementById("uniqueValues").value = "";
+        grid = [];
+        previews = [];
+        document.getElementById("seatsGrid").innerHTML = "";
+        document.getElementById("previewContainer").innerHTML = "";
+        document.getElementById("addHall").disabled = true;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        document.getElementById("hallName").focus();
+      }
+
+      function createSeat(value, index, disabled = false) {
+        const seat = document.createElement("div");
+        seat.className = `seat ${disabled ? "disabled" : ""}`;
+
+        const iconDiv = document.createElement("div");
+        iconDiv.className = "chair-icon";
+        iconDiv.innerHTML = chairIcon;
+        seat.appendChild(iconDiv);
+
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = value;
+        input.maxLength = 2;
+        input.disabled = disabled;
+
+        if (!disabled) {
+          input.addEventListener("change", (e) => {
+            grid[index] = e.target.value;
+          });
+        }
+
+        seat.appendChild(input);
+        return seat;
+      }
+
+      function generateGrid(rows, cols, unique) {
+        grid = Array.from({ length: rows * cols }, (_, i) =>
+          ((i % unique) + 1).toString()
+        );
+        renderGrid();
+      }
+
+      function renderGrid() {
+        const seatsGrid = document.getElementById("seatsGrid");
+        const cols =
+          parseInt(document.getElementById("gridSize").value.split("x")[1]) ||
+          1;
+        seatsGrid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+        seatsGrid.innerHTML = "";
+
+        grid.forEach((value, index) => {
+          const seat = createSeat(value, index, false);
+          seatsGrid.appendChild(seat);
+        });
+
+        document.getElementById("addHall").disabled = grid.length === 0;
+      }
+
+      function renderPreviews() {
+        const previewContainer = document.getElementById("previewContainer");
+        previewContainer.innerHTML = "";
+
+        previews.forEach((preview) => {
+          const previewPanel = document.createElement("div");
+          previewPanel.className = "panel animate-fade-in";
+
+          const title = document.createElement("h4");
+          title.className = "section-title";
+          title.textContent = preview.name;
+
+          const grid = document.createElement("div");
+          grid.className = "seats-grid";
+          const cols =
+            parseInt(document.getElementById("gridSize").value.split("x")[1]) ||
+            1;
+          grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
+
+          preview.grid.forEach((value, index) => {
+            const seat = createSeat(value, index, true);
+            grid.appendChild(seat);
+          });
+
+          previewPanel.appendChild(title);
+          previewPanel.appendChild(grid);
+          previewContainer.appendChild(previewPanel);
+        });
+      }
+
+      // Event Listeners
+      document
+        .getElementById("resetButton")
+        .addEventListener("click", resetAll);
+
+      document.getElementById("gridSize").addEventListener("change", (e) => {
+        const [rows, cols] = e.target.value.split("x").map(Number);
+        const unique =
+          parseInt(document.getElementById("uniqueValues").value) || 1;
+        if (rows && cols) generateGrid(rows, cols, unique);
+      });
+      // Event Listeners
+      document
+        .getElementById("resetButton")
+        .addEventListener("click", resetAll);
+
+      document.getElementById("gridSize").addEventListener("change", (e) => {
+        const [rows, cols] = e.target.value.split("x").map(Number);
+        const unique =
+          parseInt(document.getElementById("uniqueValues").value) || 1;
+        if (rows && cols) generateGrid(rows, cols, unique);
+      });
+
+      document
+        .getElementById("uniqueValues")
+        .addEventListener("change", (e) => {
+          const [rows, cols] = document
+            .getElementById("gridSize")
+            .value.split("x")
+            .map(Number);
+          const unique = parseInt(e.target.value) || 1;
+          if (rows && cols) generateGrid(rows, cols, unique);
+        });
+
+      document.getElementById("addHall").addEventListener("click", () => {
+        const hallName = document.getElementById("hallName");
+        if (grid.length > 0) {
+          previews.push({
+            name: hallName.value || "Unnamed Hall",
+            grid: [...grid],
+          });
+          renderPreviews();
+          hallName.value = "";
+        }
+      });
+
+      const menuItems = document.querySelectorAll(".nav-item");
+      const toggleMenu = document.getElementById("navbarNav");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          toggleMenu.classList.remove("show");
+        });
+      });
+    </script>
+  </body>
+</html>

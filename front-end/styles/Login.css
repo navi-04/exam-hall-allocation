@@ -14,7 +14,23 @@ body {
   padding: 30px;
 }
 
+.logo-container {
+ 
+  position: absolute;
+  margin-bottom: 600px;
+  margin-left: 50px;  /* Space from the top */
+  z-index: 10; /* Ensure it appears above other elements */
+}
+
+.logo-container img {
+  width: 180px; /* Adjust size as needed */
+  height: auto;
+  display: block;
+  margin: 0 auto; /* Centers the image */
+}
+
 .container {
+  margin-top: 30px;
   position: relative;
   max-width: 850px;
   width: 100%;
@@ -207,7 +223,7 @@ body {
 }
 
 .forms .form-content .button input:hover {
-  background: #ff6600;
+  background: #4293e3;
 }
 
 .forms .form-content label {
@@ -270,8 +286,8 @@ body {
 
 .button input:hover {
   transform: translateY(-3px);
-  background: #ff6600;
+  background: #4293e3;
   animation: slideTop 1s ease forwards;
     animation-delay: 2s;
-    box-shadow: 0 0 5px rgb(247, 151, 18), 0 0 25px rgb(225, 91, 7);
+    box-shadow: 0 0 5px rgb(94, 111, 220), 0 0 25px rgb(89, 154, 233);
 } 

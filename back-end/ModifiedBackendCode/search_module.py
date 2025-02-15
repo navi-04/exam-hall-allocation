@@ -1,4 +1,4 @@
-def search_and_display_halls(default_roll_number="927623bcs115"):  
+def search_and_display_halls(default_roll_number):  
     halls = [  
         [  
             ["927623bcs001", "927623bee001", "927623ece001", "927623bcs002", "927623bee002"],  

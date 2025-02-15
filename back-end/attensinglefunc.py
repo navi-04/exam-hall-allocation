@@ -3,7 +3,7 @@ import sqlite3
 from twilio.rest import Client
 import os
 
-def attendance_tracker(file_path, account_sid, auth_token, twilio_phone):
+def attendance_tracker(file_path, account_sid, auth_token, twilio_phone): #PERCENTATE 
     # Database initialization
     conn = sqlite3.connect("attendance.db")
     cursor = conn.cursor()
@@ -52,6 +52,7 @@ def attendance_tracker(file_path, account_sid, auth_token, twilio_phone):
             if attendance_percentage < 80:
                 if account_sid and auth_token and twilio_phone:
                     send_sms(phone_number, student_name, attendance_percentage)
+                    
                 else:
                     continue
 

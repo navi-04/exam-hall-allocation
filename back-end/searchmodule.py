@@ -1,5 +1,4 @@
-def search_and_display_halls():  
-    # Data for all 12 halls
+def search_and_display_halls(default_roll_number):  
     halls = [  
         [  
             ["927623bcs001", "927623bee001", "927623ece001", "927623bcs002", "927623bee002"],  
@@ -14,21 +13,21 @@ def search_and_display_halls():
             ["927623bee014", "927623ece014", "927623bcs016", "927623bee015", "927623ece015"],  
             ["927623bcs017", "927623bee016", "927623ece016", "927623bcs018", "927623bee017"],  
             ["927623ece017", "927623bcs019", "927623bee018", "927623ece018", "927623bcs020"]  
-        ],  
+        ],
         [  
             ["927623bcs021", "927623bee021", "927623ece021", "927623bcs022", "927623bee022"],  
             ["927623ece022", "927623bcs024", "927623bee023", "927623ece023", "927623bcs025"],  
             ["927623bee024", "927623ece024", "927623bcs026", "927623bee025", "927623ece025"],  
             ["927623bcs027", "927623bee026", "927623ece026", "927623bcs028", "927623bee027"],  
             ["927623ece027", "927623bcs029", "927623bee028", "927623ece028", "927623bcs030"]  
-        ],  
+        ],
         [  
             ["927623bcs031", "927623bee031", "927623ece031", "927623bcs032", "927623bee032"],  
             ["927623ece032", "927623bcs034", "927623bee033", "927623ece033", "927623bcs035"],  
             ["927623bee034", "927623ece034", "927623bcs036", "927623bee035", "927623ece035"],  
             ["927623bcs037", "927623bee036", "927623ece036", "927623bcs038", "927623bee037"],  
             ["927623ece037", "927623bcs039", "927623bee038", "927623ece038", "927623bcs040"]  
-        ],  
+        ],
         [  
             ["927623bcs041", "927623bee041", "927623ece041", "927623bcs042", "927623bee042"],  
             ["927623ece042", "927623bcs044", "927623bee043", "927623ece043", "927623bcs045"],  
@@ -87,41 +86,19 @@ def search_and_display_halls():
         ]  
     ]  
 
-    while True:  
-        roll_number = input("Enter Roll Number: ").strip().lower()  
-        found = False  
+    roll_number = default_roll_number.strip().lower()  
 
-        for hall_index, hall in enumerate(halls):  
-            for row_index, row in enumerate(hall):  
-                if roll_number in row:  
-                    found = True  
-                    hall_num = hall_index + 1  
-                    row_num = row_index + 1  
-                    seat_num = row.index(roll_number) + 1  
+    for hall_index, hall in enumerate(halls):  
+        for row_index, row in enumerate(hall):  
+            if roll_number in row:  
+                hall_num = hall_index + 1  
+                row_num = row_index + 1  
+                seat_num = row.index(roll_number) + 1  
+                return hall_num, row_num, seat_num  
+                
 
-                    print(f"Roll number found in Hall {hall_num}, Row {row_num}, Seat {seat_num}")  
-                    print(f"Hall {hall_num} Layout:")  
-
-                    for r in range(len(hall)):  
-                        row_layout = []  
-                        for s in range(len(hall[r])):  
-                            seat = hall[r][s]  
-                           if seat == roll_number:  
-                                row_layout.append(f"[{seat}]")  
-                            else:  
-                                row_layout.append(f"[{r + 1}-{s + 1}]")  
-                        print(" ".join(row_layout))  
-                    break  
-
-            if found:  
-                break  
-
-        if not found:  
-            print("Roll number not found.")  
-
-        search_again = input("Do you want to search again? (yes/no): ").strip().lower()  
-        if search_again != "yes":  
-            break  
+    return  # Return nothing if not found
 
 
-search_and_display_halls()
+
+result = search_and_display_halls()

@@ -1,82 +1,54 @@
 import pandas as pd
-import sqlite3
-from twilio.rest import Client
 import os
+from twilio.rest import Client
 
-def attendance_tracker(file_path, account_sid, auth_token, twilio_phone): #PERCENTATE 
-    # Database initialization
-    conn = sqlite3.connect("attendance.db")
-    cursor = conn.cursor()
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS attendance (
-            student_name TEXT,
-            phone_number TEXT,
-            attendance_percentage REAL
+# Global variable to store attendance records
+attendance_records = {}
+
+def calculate_attendance(file_path):
+    global attendance_records  # Use global variable to store records
+
+    if not os.path.isfile(file_path):
+        return {}
+
+    try:
+        data_frame = pd.read_excel(file_path)
+    except Exception:
+        return {}
+
+    attendance_records = {}  # Reset before storing new records
+    date_columns = data_frame.columns[1:-1]  # Exclude name and phone columns
+    for _, row in data_frame.iterrows():
+        register_number = row[0]  # Register number
+        phone_number = row[-1]  # Last column as phone number
+
+        present_count = sum(1 for col in date_columns if str(row[col]).strip().upper() == "P")
+        total_classes = len(date_columns)
+        attendance_percentage = (present_count / total_classes) * 100 if total_classes > 0 else 0
+
+        attendance_records[register_number] = (attendance_percentage, phone_number)
+    
+    return attendance_records  # Return records for immediate use
+
+def send_sms(phone_number, register_number, attendance, account_sid, auth_token, twilio_phone):
+    try:
+        client = Client(account_sid, auth_token, timeout=30)
+        client.messages.create(
+            body=f"Dear {register_number}, your attendance is {attendance:.2f}% which is below the required percentage. Please improve your attendance.",
+            from_=twilio_phone,
+            to=phone_number
         )
-    """)
-    conn.commit()
+    except Exception:
+        pass
 
-    data_frame = None  # Dataframe to hold Excel data
-
-    def load_excel_file(file_path):
-        nonlocal data_frame
-        if not os.path.isfile(file_path):
-            return
-
-        try:
-            data_frame = pd.read_excel(file_path)
-        except Exception as e:
-            return
-
-    def calculate_attendance():
-        nonlocal data_frame
-        if data_frame is None:
-            return
-
-        date_columns = data_frame.columns[1:-1]  # Exclude name and phone columns
-
-        for _, row in data_frame.iterrows():
-            student_name = row[0]
-            phone_number = row[-1]
-            
-            present_count = sum(1 for col in date_columns if str(row[col]).strip().lower() == "present")
-            attendance_percentage = (present_count / len(date_columns)) * 100
-
-            # Save to database
-            cursor.execute("""
-                INSERT OR REPLACE INTO attendance (student_name, phone_number, attendance_percentage)
-                VALUES (?, ?, ?)
-            """, (student_name, phone_number, attendance_percentage))
-
-            # Send SMS if attendance < 80%
-            if attendance_percentage < 80:
-                if account_sid and auth_token and twilio_phone:
-                    send_sms(phone_number, student_name, attendance_percentage)
-                    
-                else:
-                    continue
-
-        conn.commit()
-       #print("Attendance calculated and stored successfully!")
-
-    def send_sms(phone_number, student_name, attendance):
-        try:
-            client = Client(account_sid, auth_token)
-            client.messages.create(
-                body=f"Dear {student_name}, your attendance is {attendance:.2f}% which is below the required 80%. Please improve your attendance.",
-                from_=twilio_phone,
-                to=phone_number
-            )
-        except Exception as e:
-            return
-
-    load_excel_file(file_path)
-    calculate_attendance()
-
-# Example usage (input parameters passed)
-attendance_tracker(
-    file_path=r"C:\Users\nisha\OneDrive\Documents\GitHub\exam-hall-allocation\data\atten.xlsx",
-    account_sid="your_account_sid",
-    auth_token="your_auth_token",
-    twilio_phone="your_twilio_phone_number"
-)
+# Example usage
+try:
+    attendance_records = calculate_attendance(  # Store the records in the global variable
+        file_path=r"C:\Users\nisha\OneDrive\Documents\GitHub\exam-hall-allocation\data\atten.xlsx"
+    )
+    
+    for register_number, (attendance_percentage, phone_number) in attendance_records.items():
+        if attendance_percentage < 80:
+            send_sms(phone_number, register_number, attendance_percentage, "your_account_sid", "your_auth_token", "your_twilio_phone_number")
+except Exception:
+    pass

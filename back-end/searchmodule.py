@@ -1,4 +1,4 @@
-def search_and_display_halls(default_roll_number="927623bcs074"):  
+def search_and_display_halls(default_roll_number):  
     halls = [  
         [  
             ["927623bcs001", "927623bee001", "927623ece001", "927623bcs002", "927623bee002"],  
@@ -95,9 +95,10 @@ def search_and_display_halls(default_roll_number="927623bcs074"):
                 row_num = row_index + 1  
                 seat_num = row.index(roll_number) + 1  
                 return hall_num, row_num, seat_num  
+                
 
-    return None  # Return None if the roll number is not found
+    return  # Return nothing if not found
 
-# Example usage within your script or application:
+
+
 result = search_and_display_halls()
-# You can now use `result` in your program without printing to the terminal.

@@ -98,7 +98,7 @@ function updatePipe(i) {
 
 function drawPipe(x, y, life, ttl, width, hue) {
   ctx.a.save();
-  ctx.a.strokeStyle = `hsla(${hue},75%,50%,${fadeInOut(life, ttl) * 0.125})`;
+  ctx.a.strokeStyle = `hsla(${hue},75%,50%,${fadeInOut(life, ttl) * 0.12})`;
   ctx.a.beginPath();
   ctx.a.arc(x, y, width, 0, TAU);
   ctx.a.stroke();

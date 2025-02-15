@@ -1,6 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FEWINFOS</title>
+    <meta
+      name="description"
+      content="A set of animated ambient canvas backgrounds with different effects"
+    />
+    <meta
+      name="keywords"
+      content="canvas, ambient, background, animation, javascript, demo, web development"
+    />
+    <meta name="author" content="Codrops" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="base.css" />
+    <link rel="stylesheet" type="text/css" href="demo5.css" />
+    
+
+    <script>
+      document.documentElement.className = "js";
+      var supportsCssVars = function () {
+        var e,
+          t = document.createElement("style");
+        return (
+          (t.innerHTML = "root: { --tmp-var: bold; }"),
+          document.head.appendChild(t),
+          (e = !!(
+            window.CSS &&
+            window.CSS.supports &&
+            window.CSS.supports("font-weight", "var(--tmp-var)")
+          )),
+          t.parentNode.removeChild(t),
+          e
+        );
+      };
+      supportsCssVars() ||
+        alert(
+          "Please view this demo in a modern browser that supports CSS Variables."
+        );
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="FewInfos is a team of young innovators on a mission to create. We transform our passion for technology into real-world solutions.">
@@ -16,7 +55,7 @@
      crossorigin="anonymous"></script>
 
 </head>
-<body>
+
 
   <div class="home-navbar-unique">
     <nav class="navbar navbar-expand-lg navbar-dark">

@@ -93,5 +93,5 @@ file_path = "C:/Users/GOD/Documents/GitHub/exam-hall-allocation/data/file.csv"
 # Process Data and Get Allocations
 allocations = process_registration_data(file_path, department_map)
 
-# Print the allocations
-print_hall_allocation(allocations)
+#Print the allocations
+#print_hall_allocation(allocations)

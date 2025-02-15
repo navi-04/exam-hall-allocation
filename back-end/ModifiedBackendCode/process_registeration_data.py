@@ -4,8 +4,8 @@ import os
 import sqlite3
 
 # Main function to handle all operations
-def process_registration_data(department_map, hall_patterns):
-    file_path = "C:/Users/GOD/Documents/GitHub/exam-hall-allocation/file.csv"  # Use the uploaded CSV file directly
+def process_registration_data(path,department_map, hall_patterns):
+
     
     # Reset Database
     def reset_database():
@@ -125,8 +125,8 @@ hall_patterns = {
 
 # Department Mapping
 department_map = {1: "CSE", 2: "MECH", 3: "AIDS", 4: "CSBS"}
-
+file_path = "C:/Users/GOD/Documents/GitHub/exam-hall-allocation/data/file.csv"
 # Process Data and Get Allocations
-allocations = process_registration_data(department_map, hall_patterns)
+allocations = process_registration_data(file_path,department_map, hall_patterns)
 #print(allocations)
 #print_hall_allocation(allocations)

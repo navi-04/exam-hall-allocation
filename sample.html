@@ -362,7 +362,11 @@
       </div>
     </section>
     <div class="event-page" style="background-color: #e6f2ff">
+      
       <section class="services" id="services-page">
+        <div class="events-bg-iframe">
+          <iframe src="fewinfos/animated-background/dist/index.html" frameborder="0"></iframe>
+        </div>
         <h1>EVENTS</h1>
         <p class="description">
           Join us for insightful and engaging events designed to inspire,
@@ -411,6 +415,7 @@
     </div>
 
     <section class="projects" id="projects-page">
+      
      
       <h2>PROJECTS</h2>
       <p>
@@ -477,55 +482,57 @@
         </div>
       </div>
     </section>
-
-    <div class="about-container" id="about-page">
-      
-      
-      <h1>About Us</h1>
-      <p>
-        FewInfos is more than just a team; it's a vision brought to life by a
-        group of passionate college students united by curiosity and a drive to
-        innovate. We are dreamers, learners, and creators, working tirelessly to
-        turn ideas into impactful solutions. Our journey began with a simple
-        belief: learning never stops.
-      </p>
-      <p>
-        FewInfos became our platform to explore the world of technology, gain
-        hands-on experience, and transform our passion into something
-        meaningful. At FewInfos, we embrace challenges as stepping stones to
-        success. Each project we take on reflects our dedication to quality,
-        innovation, and the pursuit of excellence.
-      </p>
-      <p>
-        Join us as we embark on this exciting journey to turn aspirations into
-        achievements! Let's innovate, grow, and succeed together!
-      </p>
-      <button class="read-more">Read more</button>
-      <div class="hover-text" style="display: none">
+    <section>
+      <div class="about-container" id="about-page">
+        <!-- Iframe Background Animation -->
+        <div class="about-animation-wrapper">
+          <iframe src="fewinfos/index2.html" class="about-iframe"></iframe>
+        </div>
+    
+        <!-- About Content -->
+        <h1>About Us</h1>
         <p>
-          FewInfos is a team of passionate college students driven by curiosity
-          and innovation. We turn ideas into impactful projects, exploring
-          technology to solve real-world problems.
+          FewInfos is more than just a team; it's a vision brought to life by a
+          group of passionate college students united by curiosity and a drive to
+          innovate. We are dreamers, learners, and creators, working tirelessly to
+          turn ideas into impactful solutions. Our journey began with a simple
+          belief: learning never stops.
         </p>
         <p>
-          Our vision is to create a future where technology empowers and
-          transforms. Through collaboration, creativity, and determination,
-          we’re building a foundation for a startup that delivers innovative
-          solutions and inspires others.
+          FewInfos became our platform to explore the world of technology, gain
+          hands-on experience, and transform our passion into something meaningful.
         </p>
-        <p>
-          At FewInfos, every challenge is an opportunity to learn and grow. We
-          specialize in mobile and web development, branding, and creative
-          problem-solving, guided by our core values: innovation, teamwork,
-          growth, and integrity.
-        </p>
-        <p>
-          FewInfos isn’t just about projects—it’s about building a legacy. Join
-          us as we shape the future, one idea at a time.
-        </p>
+        <button class="read-more">Read more</button>
+    
+        <!-- Hidden Text -->
+        <div class="hover-text">
+          <p>
+            FewInfos is a team of passionate college students driven by curiosity
+            and innovation. We turn ideas into impactful projects, exploring
+            technology to solve real-world problems.
+          </p>
+          <p>
+            Our vision is to create a future where technology empowers and
+            transforms. Through collaboration, creativity, and determination,
+            we’re building a foundation for a startup that delivers innovative
+            solutions and inspires others.
+          </p>
+          <p>
+            At FewInfos, every challenge is an opportunity to learn and grow. We
+            specialize in mobile and web development, branding, and creative
+            problem-solving.
+          </p>
+        </div>
       </div>
-    </div>
-
+    </section>
+    
+    <!-- JavaScript to Toggle Read More -->
+    <script>
+      document.querySelector(".read-more").addEventListener("click", function() {
+        document.querySelector(".hover-text").classList.toggle("show-text");
+      });
+    </script>
+    
     <div class="footer" id="contact-page">
       <div class="footer-section">
         <h3>Fewinfos</h3>

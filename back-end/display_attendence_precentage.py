@@ -1,4 +1,4 @@
-import attensinglefunc  # Importing the attendance calculation module
+import attendence_sms  # Importing the attendance calculation module
 
 def filter_attendance(attendance_records):
     try:
@@ -24,7 +24,7 @@ def filter_attendance(attendance_records):
         print(f"Unexpected error: {e}")
 
 # Fetch attendance records from the previous execution (assumes it's already calculated)
-attendance_records = attensinglefunc.attendance_records  # Using the precomputed records
+attendance_records = attendence_sms.attendance_records  # Using the precomputed records
 
 # Call the function with the attendance records
 filter_attendance(attendance_records)

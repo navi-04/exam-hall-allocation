@@ -2,10 +2,10 @@ import csv
 import pandas as pd
 import os
 import sqlite3
+from get_hall_pattern import hall_patterns  # Import the hall patterns
 
 # Main function to handle all operations
-def process_registration_data(department_map, hall_patterns):
-    file_path = "C:/Users/nisha/OneDrive/Documents/GitHub/exam-hall-allocation/data/file.csv"  # Use the uploaded CSV file directly
+def process_registration_data(path, department_map):
     
     # Reset Database
     def reset_database():
@@ -73,11 +73,12 @@ def process_registration_data(department_map, hall_patterns):
         return hall_allocations
 
     reset_database()
-    insert_data_into_db(file_path)
+    insert_data_into_db(path)
     register_numbers = fetch_data_from_db()
     allocations = allocate_seats(register_numbers, hall_patterns)
     
     return allocations
+
 def print_hall_allocation(allocations):
     for hall, allocation in allocations.items():
         print(f"{hall} Allocation:")
@@ -85,48 +86,12 @@ def print_hall_allocation(allocations):
             print(f"  {row}")
         print()
 
-# Hall Patterns
-hall_patterns = {
-    "HALL_1": [
-        ["1", "3", "2", "3", "1"],
-        ["2", "4", "1", "4", "2"],
-        ["1", "3", "2", "3", "1"],
-        ["2", "4", "1", "4", "2"],
-        ["1", "3", "2", "3", "1"]
-    ],
-    "HALL_2": [
-        ["4", "1", "3", "2", "4"],
-        ["3", "2", "4", "1", "3"],
-        ["4", "1", "3", "2", "4"],
-        ["3", "2", "4", "1", "3"],
-        ["4", "1", "3", "2", "4"]
-    ],
-    "HALL_3": [
-        ["2", "4", "2", "3", "4"],
-        ["1", "3", "1", "2", "1"],
-        ["2", "4", "4", "3", "4"],
-        ["1", "3", "1", "2", "1"],
-        ["2", "4", "2", "3", "4"]
-    ],
-    "HALL_4": [
-        ["3", "1", "2", "4", "3", "1", "2", "4", "3", "1"],
-        ["2", "4", "3", "1", "2", "4", "3", "1", "2", "4"],
-        ["3", "1", "2", "4", "3", "1", "2", "4", "3", "1"],
-        ["2", "4", "3", "1", "2", "4", "3", "1", "2", "4"],
-        ["3", "1", "2", "4", "3", "1", "2", "4", "3", "1"]
-    ],
-    "HALL_5": [
-        ["4", "3", "4", "3", "4", "3", "4", "3", "4", "3"],
-        ["1", "2", "1", "2", "1", "2", "1", "2", "1", "2"],
-        ["4", "3", "4", "3", "4", "3", "4", "3", "4", "3"],
-        ["1", "2", "1", "2", "1", "2", "1", "2", "1", "2"]
-    ]
-}
-
 # Department Mapping
 department_map = {1: "CSE", 2: "MECH", 3: "AIDS", 4: "CSBS"}
+file_path = "C:/Users/GOD/Documents/GitHub/exam-hall-allocation/data/file.csv"
 
 # Process Data and Get Allocations
-allocations = process_registration_data(department_map, hall_patterns)
-#print(allocations)
+allocations = process_registration_data(file_path, department_map)
+
+#Print the allocations
 #print_hall_allocation(allocations)

@@ -208,10 +208,7 @@ a:hover, a:focus {
         pointer-events: none;
         grid-template-columns: 25% 50% 25%;
         grid-template-rows: auto auto auto;
-        grid-template-areas: 
-            "title title ... "
-            "... ... ..."
-            "github demos links";
+       
     }
 
     .frame__title-wrap {

@@ -2,7 +2,7 @@ import csv
 import pandas as pd
 import os
 import sqlite3
-from get_hall_pattern import hall_patterns  # Import the hall patterns
+from server import hall_patterns  # Import the hall patterns
 
 # Main function to handle all operations
 def process_registration_data(path, department_map):
@@ -58,7 +58,9 @@ def process_registration_data(path, department_map):
         department_iterators = {department: iter(register_numbers[department]) for department in register_numbers}
         hall_allocations = {}
         
-        for hall_name, pattern in hall_patterns.items():
+        for item in hall_patterns:
+            hall_name = item.name
+            pattern = item.grid
             num_rows = len(pattern)
             num_cols = len(pattern[0])
             hall_allocations[hall_name] = []
@@ -88,10 +90,10 @@ def print_hall_allocation(allocations):
 
 # Department Mapping
 department_map = {1: "CSE", 2: "MECH", 3: "AIDS", 4: "CSBS"}
-file_path = "C:/Users/GOD/Documents/GitHub/exam-hall-allocation/data/file.csv"
+file_path = "D:/GitHub/exam-hall-allocation/data/file.csv"
 
 # Process Data and Get Allocations
 allocations = process_registration_data(file_path, department_map)
 
 #Print the allocations
-#print_hall_allocation(allocations)
+print_hall_allocation(allocations)

@@ -65,7 +65,7 @@
               type="file"
               id="fileInput"
               class="input-box"
-              accept=".csv"
+              accept=".xlsx"
               onchange="handleFile()"
             />
           </div>
@@ -85,6 +85,9 @@
             />
           </div>
 
+          <button class="notify-btn"  id="enter" onclick="">
+            Enter
+          </button>
           <button class="notify-btn" onclick="notifyStudents()">
             Notify Students
           </button>
@@ -119,6 +122,44 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+
+document.getElementById("enter").addEventListener("click", async () => {
+    const button = document.getElementById('enter');
+    button.disabled = true;
+
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const percentage = document.getElementById("percentageInput").value;
+
+    // Ensure a file is selected
+    if (!file) {
+        alert("Please select a file before submitting.");
+        button.disabled = false;
+        return;
+    }
+
+    // Create FormData object to handle file + text
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('percentage', percentage);
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data', {
+            method: 'POST',
+            body: formData
+        });
+
+        const result = await response.json();
+        alert(result.message);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } finally {
+        button.disabled = false;
+    }
+});
+
+
       let studentsData = [];
 
       // Function to handle file input (CSV)

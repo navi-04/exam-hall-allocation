@@ -1228,64 +1228,100 @@ body {
         font-size: 0.85em;
     }
   }
+  
   /* ----------------projects end--------------------- */
   
   
-  /* ----------------about--------------------- */
-  
-  .about-container {
-    text-align: center;
-    padding: 50px 20px;
-  }
-  
-  .about-container h1 {
-    font-size: 36px;
-    color: #003366;
-    margin-bottom: 20px;
-  }
-  
-  .about-container p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.8;
-  }
-  
-  .about-container .read-more {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #0066cc;
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    border-radius: 5px;
-    margin-top: 20px;
-    border: #0066cc ;
-    cursor: pointer;
-  }
-  
-  .about-container .read-more:hover {
-    background-color: #004d99;
-  }
-  
-  
-  .hover-text {
-    display: none;
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #e6f2ff;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-  }
-  
-  .hover-text p {
-    font-size: 18px;
-    color: #333;
-    margin-bottom: 20px;
-    line-height: 1.8;
-  }
-  
+/* ---------------- About Section Styling ---------------- */
+/* ---------------- About Section Styling ---------------- */
+
+.about-container {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  padding: 50px 10%;
+  text-align: center;
+  color: white;
+  overflow: hidden;
+}
+
+/* Wrapper for animation */
+.about-animation-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Iframe for animation */
+.about-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  border: none;
+  pointer-events: none; /* Ensures iframe does not interfere */
+}
+
+/* Content Overlay */
+.about-container h1,
+.about-container p,
+.about-container .read-more {
+  position: relative;
+  z-index: 2; /* Places content above iframe */
+}
+
+/* Heading */
+.about-container h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* Paragraph Styling */
+.about-container p {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+/* Read More Button */
+.read-more {
+  background-color: #007bff;
+  color: white;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: 0.3s ease-in-out;
+}
+
+.read-more:hover {
+  background-color: #0056b3;
+}
+
+/* Hover Text (Hidden by Default) */
+.hover-text {
+  display: none;
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1rem;
+}
+
+/* If you want the hidden text to appear on click */
+.show-text {
+  display: block;
+}
+
+
+  /* Header */
   /* ----------------about end--------------------- */
   
 

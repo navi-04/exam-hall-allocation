@@ -131,14 +131,12 @@ document.getElementById("enter").addEventListener("click", async () => {
     const file = fileInput.files[0];
     const percentage = document.getElementById("percentageInput").value;
 
-    // Ensure a file is selected
     if (!file) {
-        alert("Please select a file before submitting.");
+        alert("Please select an .xlsx file.");
         button.disabled = false;
         return;
     }
 
-    // Create FormData object to handle file + text
     const formData = new FormData();
     formData.append('file', file);
     formData.append('percentage', percentage);

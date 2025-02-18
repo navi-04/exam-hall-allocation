@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import pandas as pd 
-
+from search_module import search_and_display_halls
 app = Flask(__name__)
 CORS(app)
 
@@ -77,6 +77,24 @@ def add_hall():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route('/get_register_num', methods=['POST'])
+def get_register_num():
+    try:
+        data = request.json
+        hall_patterns = data.get('previews')
+        print(hall_patterns)
+        # regiser_num = data.get('regiser_num')
+        #search_and_display_halls(regiser_num)
+        return jsonify({"message": "Data received successfully"}), 200
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -99,7 +99,7 @@
           <div class="input-group">
             <label for="dropdown" class="label">Select Category</label>
             <select class="dropdown" id="dropdown" onchange="updateTable()">
-              <option value="">Select</option>
+              <option value="none">None</option>
               <option value="All Students">All Students</option>
               <option value="Above Limit">Above Limit</option>
               <option value="Below Limit">Below Limit</option>
@@ -157,6 +157,26 @@ document.getElementById("enter").addEventListener("click", async () => {
     }
 });
 
+document.getElementById("dropdown").addEventListener("change", async () => {
+    const selectedOption = document.getElementById('dropdown').value;
+
+    const payload = { selectedOption };
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data_2', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+        const result = await response.json();
+        alert(result.message);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } 
+});
+
 
       let studentsData = [];
 
@@ -199,48 +219,48 @@ document.getElementById("enter").addEventListener("click", async () => {
       }
 
       // Function to update table when dropdown changes
-      function updateTable() {
-        const selectedValue = document.getElementById("dropdown").value;
-        const tablePlaceholder = document.getElementById("tablePlaceholder");
+      // function updateTable() {
+      //   const selectedValue = document.getElementById("dropdown").value;
+      //   const tablePlaceholder = document.getElementById("tablePlaceholder");
 
-        if (selectedValue) {
-          let filteredData = [];
+      //   if (selectedValue) {
+      //     let filteredData = [];
 
-          if (selectedValue === "All Students") {
-            filteredData = studentsData;
-          } else if (selectedValue === "Above Limit") {
-            const percentageLimit =
-              document.getElementById("percentageInput").value || 0;
-            filteredData = studentsData.filter(
-              (student) => student.percentage >= percentageLimit
-            );
-          } else if (selectedValue === "Below Limit") {
-            const percentageLimit =
-              document.getElementById("percentageInput").value || 0;
-            filteredData = studentsData.filter(
-              (student) => student.percentage < percentageLimit
-            );
-          }
+      //     if (selectedValue === "All Students") {
+      //       filteredData = studentsData;
+      //     } else if (selectedValue === "Above Limit") {
+      //       const percentageLimit =
+      //         document.getElementById("percentageInput").value || 0;
+      //       filteredData = studentsData.filter(
+      //         (student) => student.percentage >= percentageLimit
+      //       );
+      //     } else if (selectedValue === "Below Limit") {
+      //       const percentageLimit =
+      //         document.getElementById("percentageInput").value || 0;
+      //       filteredData = studentsData.filter(
+      //         (student) => student.percentage < percentageLimit
+      //       );
+      //     }
 
-          let tableHTML = `<table>
-                                    <tr>
-                                        <th>Register Number</th>
-                                        <th>Attendance Percentage</th>
-                                    </tr>`;
+      //     let tableHTML = `<table>
+      //                               <tr>
+      //                                   <th>Register Number</th>
+      //                                   <th>Attendance Percentage</th>
+      //                               </tr>`;
 
-          filteredData.forEach((student) => {
-            tableHTML += `<tr>
-                                    <td>${student.regNo}</td>
-                                    <td>${student.percentage}%</td>
-                                  </tr>`;
-          });
+      //     filteredData.forEach((student) => {
+      //       tableHTML += `<tr>
+      //                               <td>${student.regNo}</td>
+      //                               <td>${student.percentage}%</td>
+      //                             </tr>`;
+      //     });
 
-          tableHTML += `</table>`;
-          tablePlaceholder.innerHTML = tableHTML;
-        } else {
-          tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`;
-        }
-      }
+      //     tableHTML += `</table>`;
+      //     tablePlaceholder.innerHTML = tableHTML;
+      //   } else {
+      //     tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`;
+      //   }
+      // }
 
       // Function to reset the inputs
       function resetInputs() {

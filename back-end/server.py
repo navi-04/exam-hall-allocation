@@ -92,7 +92,16 @@ def get_register_num():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+@app.route('/attendance_data_2', methods=['POST'])
+def attendance_data_2():
+    try:
+        data = request.json
+        selected_option = data.get('selectedOption')
+        print(selected_option)
+        return jsonify({"message": "Data received successfully"}), 200
 
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 

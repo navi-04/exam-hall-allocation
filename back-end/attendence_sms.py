@@ -28,7 +28,7 @@ def calculate_attendance(file_path):
 
         attendance_records[register_number] = (attendance_percentage, phone_number)
     
-    return attendance_records  # Return records for immediate use
+    return attendance_records
 
 def send_sms(phone_number, register_number, attendance, account_sid, auth_token, twilio_phone):
     try:

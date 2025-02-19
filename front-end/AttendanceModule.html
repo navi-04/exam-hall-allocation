@@ -98,11 +98,11 @@
         <div class="right-panel">
           <div class="input-group">
             <label for="dropdown" class="label">Select Category</label>
-            <select class="dropdown" id="dropdown" onchange="updateTable()">
+            <select class="dropdown" id="dropdown">
               <option value="none">None</option>
-              <option value="All Students">All Students</option>
-              <option value="Above Limit">Above Limit</option>
-              <option value="Below Limit">Below Limit</option>
+              <option value="1">All Students</option>
+              <option value="2">Above Limit</option>
+              <option value="3">Below Limit</option>
             </select>
           </div>
           <div class="table-placeholder" id="tablePlaceholder">
@@ -147,14 +147,10 @@ document.getElementById("enter").addEventListener("click", async () => {
             body: formData
         });
 
-        const result = await response.json();
-        alert(result.message);
     } catch (error) {
         console.error('Error:', error);
         alert('Failed to send data.');
-    } finally {
-        button.disabled = false;
-    }
+    } 
 });
 
 document.getElementById("dropdown").addEventListener("change", async () => {
@@ -170,7 +166,8 @@ document.getElementById("dropdown").addEventListener("change", async () => {
               });
 
         const result = await response.json();
-        alert(result.message);
+        console.log(result.rows)
+        updateTable(result.rows);
     } catch (error) {
         console.error('Error:', error);
         alert('Failed to send data.');
@@ -219,49 +216,30 @@ document.getElementById("dropdown").addEventListener("change", async () => {
       }
 
       // Function to update table when dropdown changes
-      // function updateTable() {
-      //   const selectedValue = document.getElementById("dropdown").value;
-      //   const tablePlaceholder = document.getElementById("tablePlaceholder");
+      function updateTable(rows) {
+        const tablePlaceholder = document.getElementById("tablePlaceholder");
 
-      //   if (selectedValue) {
-      //     let filteredData = [];
+        if(rows != null){
+        let tableHTML = `<table>
+                                    <tr>
+                                        <th>Register Number</th>
+                                        <th>Attendance Percentage</th>
+                                    </tr>`;
 
-      //     if (selectedValue === "All Students") {
-      //       filteredData = studentsData;
-      //     } else if (selectedValue === "Above Limit") {
-      //       const percentageLimit =
-      //         document.getElementById("percentageInput").value || 0;
-      //       filteredData = studentsData.filter(
-      //         (student) => student.percentage >= percentageLimit
-      //       );
-      //     } else if (selectedValue === "Below Limit") {
-      //       const percentageLimit =
-      //         document.getElementById("percentageInput").value || 0;
-      //       filteredData = studentsData.filter(
-      //         (student) => student.percentage < percentageLimit
-      //       );
-      //     }
+          rows.forEach((row) => {
+            tableHTML += `<tr>
+                                    <td>${row.regno}</td>
+                                    <td>${parseFloat((row.percentage).toFixed(3))}%</td>
+                                  </tr>`;
+          });
 
-      //     let tableHTML = `<table>
-      //                               <tr>
-      //                                   <th>Register Number</th>
-      //                                   <th>Attendance Percentage</th>
-      //                               </tr>`;
-
-      //     filteredData.forEach((student) => {
-      //       tableHTML += `<tr>
-      //                               <td>${student.regNo}</td>
-      //                               <td>${student.percentage}%</td>
-      //                             </tr>`;
-      //     });
-
-      //     tableHTML += `</table>`;
-      //     tablePlaceholder.innerHTML = tableHTML;
-      //   } else {
-      //     tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`;
-      //   }
-      // }
-
+          tableHTML += `</table>`;
+          tablePlaceholder.innerHTML = tableHTML;
+        }
+        else{
+          tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`
+        }
+      }
       // Function to reset the inputs
       function resetInputs() {
         document.getElementById("fileInput").value = "";

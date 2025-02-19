@@ -3,10 +3,9 @@ from flask_cors import CORS
 import pandas as pd
 import sqlite3
 from calculate_percentage import calculate_and_store_attendance
-
+from display_attendence_precentage import filter_attendance
 app = Flask(__name__)
 CORS(app)
-
 
 hall_patterns = []
 
@@ -30,7 +29,6 @@ def attendance_data():
     except Exception as e:
         print(f"Server error: {e}")
         return jsonify({"error": str(e)}), 500
-
 
 @app.route('/add_hall', methods=['POST'])
 def add_hall():
@@ -59,14 +57,10 @@ def get_register_num():
 
 @app.route('/attendance_data_2', methods=['POST'])
 def attendance_data_2():
-    try:
         data = request.json
         selected_option = data.get('selectedOption')
-        print(selected_option)
-        return jsonify({"message": "Data received successfully"}), 200
-
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        rows = filter_attendance(selected_option)
+        return jsonify({"message": "Data received successfully", "rows": rows}), 200
 
 
 

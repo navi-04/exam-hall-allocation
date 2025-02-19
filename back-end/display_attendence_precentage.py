@@ -1,30 +1,26 @@
-import attendence_sms  # Importing the attendance calculation module
+import pandas as pd
+import sqlite3
 
-def filter_attendance(attendance_records):
-    try:
-        if not attendance_records:
-            print("No attendance records found.")
-            return
+def filter_attendance(limit_percentage, db_name="attendance.db"):
+    conn = sqlite3.connect(db_name)
+    cursor = conn.cursor()
 
-        limit = float(input("Enter the attendance percentage limit: "))
-        choice = input("Do you want to see students above, below, or all? (Enter 'above', 'below', or 'all'): ").strip().lower()
+    cursor.execute("SELECT percentage_limit FROM attendance")
+    first_value = cursor.fetchone()[0]  
 
-        print("\nRegister Number\tAttendance Percentage")
-        for register_number, (attendance_percentage, phone_number) in attendance_records.items():
-            if choice == "above" and attendance_percentage > limit:
-                print(f"{register_number}\t\t{attendance_percentage:.2f}%")
-            elif choice == "below" and attendance_percentage < limit:
-                print(f"{register_number}\t\t{attendance_percentage:.2f}%")
-            elif choice == "all":
-                print(f"{register_number}\t\t{attendance_percentage:.2f}%")
+    if limit_percentage == "none":
+        return None
+    elif limit_percentage == "1":
+        cursor.execute("SELECT register_number, percentage FROM attendance")
+    elif limit_percentage == "2":
+        cursor.execute("SELECT register_number, percentage FROM attendance WHERE percentage >= ?", (first_value,))
+    elif limit_percentage == "3":
+        cursor.execute("SELECT register_number, percentage FROM attendance WHERE percentage <= ?", (first_value,))
+    
+    rows = cursor.fetchall()
+    result = [{"regno": row[0], "percentage": row[1]} for row in rows]
+    
+    cursor.close()
+    conn.close()
+    return result
 
-    except ValueError:
-        print("Invalid input! Please enter a numerical value for the attendance percentage limit.")
-    except Exception as e:
-        print(f"Unexpected error: {e}")
-
-# Fetch attendance records from the previous execution (assumes it's already calculated)
-attendance_records = attendence_sms.attendance_records  # Using the precomputed records
-
-# Call the function with the attendance records
-filter_attendance(attendance_records)

@@ -17,7 +17,7 @@ def calculate_and_store_attendance(df, percentage_limit, db_name="attendance.db"
 
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS attendance (
-            register_no TEXT PRIMARY KEY,
+            register_number TEXT PRIMARY KEY,
             percentage REAL,
             phone_number TEXT,
             percentage_limit REAL
@@ -25,7 +25,7 @@ def calculate_and_store_attendance(df, percentage_limit, db_name="attendance.db"
     """)
 
     result_df.to_sql('attendance', conn, if_exists='replace', index=False)
-
+    
     conn.commit()
     conn.close()
 

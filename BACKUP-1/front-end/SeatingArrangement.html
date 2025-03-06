@@ -113,6 +113,43 @@
       let grid = [];
       let previews = [];
 
+      document.getElementById('addHall').addEventListener('click', async () => {
+          const hallName = document.getElementById("hallName");
+          if (grid.length > 0) {
+            previews.push({
+              name: hallName.value || "Unnamed Hall",
+              grid: [...grid],
+            });
+            renderPreviews();
+            hallName.value = "";
+          }
+
+
+          const button = document.getElementById('addHall');
+          button.disabled = true;
+          button.textContent = 'Sending Data...';
+
+          const payload = { previews }; // Prepare the data to send
+
+          try {
+              const response = await fetch('http://127.0.0.1:5000/add_hall', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+              const result = await response.json();
+              alert(result.message);
+          } catch (error) {
+              console.error('Error:', error);
+              alert('Failed to send data.');
+          } finally {
+              button.disabled = false;
+              button.textContent = 'Add Hall';
+          }
+      });
+
+
       const chairIcon = `
             <svg viewBox="0 0 24 24" width="24" height="24" fill="#003366">
                 <path d="M20 8V6C20 4.34315 18.6569 3 17 3H7C5.34315 3 4 4.34315 4 6V8C2.89543 8 2 8.89543 2 10V16C2 17.1046 2.89543 18 4 18H20C21.1046 18 22 17.1046 22 16V10C22 8.89543 21.1046 8 20 8Z"/>
@@ -245,17 +282,7 @@
           if (rows && cols) generateGrid(rows, cols, unique);
         });
 
-      document.getElementById("addHall").addEventListener("click", () => {
-        const hallName = document.getElementById("hallName");
-        if (grid.length > 0) {
-          previews.push({
-            name: hallName.value || "Unnamed Hall",
-            grid: [...grid],
-          });
-          renderPreviews();
-          hallName.value = "";
-        }
-      });
+
 
       const menuItems = document.querySelectorAll(".nav-item");
       const toggleMenu = document.getElementById("navbarNav");

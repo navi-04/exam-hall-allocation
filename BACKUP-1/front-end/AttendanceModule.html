@@ -65,7 +65,7 @@
               type="file"
               id="fileInput"
               class="input-box"
-              accept=".csv"
+              accept=".xlsx"
               onchange="handleFile()"
             />
           </div>
@@ -85,6 +85,9 @@
             />
           </div>
 
+          <button class="notify-btn"  id="enter" onclick="">
+            Enter
+          </button>
           <button class="notify-btn" onclick="notifyStudents()">
             Notify Students
           </button>
@@ -95,11 +98,11 @@
         <div class="right-panel">
           <div class="input-group">
             <label for="dropdown" class="label">Select Category</label>
-            <select class="dropdown" id="dropdown" onchange="updateTable()">
-              <option value="">Select</option>
-              <option value="All Students">All Students</option>
-              <option value="Above Limit">Above Limit</option>
-              <option value="Below Limit">Below Limit</option>
+            <select class="dropdown" id="dropdown">
+              <option value="none">None</option>
+              <option value="1">All Students</option>
+              <option value="2">Above Limit</option>
+              <option value="3">Below Limit</option>
             </select>
           </div>
           <div class="table-placeholder" id="tablePlaceholder">
@@ -119,6 +122,59 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+
+document.getElementById("enter").addEventListener("click", async () => {
+    const button = document.getElementById('enter');
+    button.disabled = true;
+
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const percentage = document.getElementById("percentageInput").value;
+
+    if (!file) {
+        alert("Please select an .xlsx file.");
+        button.disabled = false;
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('percentage', percentage);
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data', {
+            method: 'POST',
+            body: formData
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } 
+});
+
+document.getElementById("dropdown").addEventListener("change", async () => {
+    const selectedOption = document.getElementById('dropdown').value;
+
+    const payload = { selectedOption };
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data_2', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+        const result = await response.json();
+        console.log(result.rows)
+        updateTable(result.rows);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } 
+});
+
+
       let studentsData = [];
 
       // Function to handle file input (CSV)
@@ -160,49 +216,30 @@
       }
 
       // Function to update table when dropdown changes
-      function updateTable() {
-        const selectedValue = document.getElementById("dropdown").value;
+      function updateTable(rows) {
         const tablePlaceholder = document.getElementById("tablePlaceholder");
 
-        if (selectedValue) {
-          let filteredData = [];
-
-          if (selectedValue === "All Students") {
-            filteredData = studentsData;
-          } else if (selectedValue === "Above Limit") {
-            const percentageLimit =
-              document.getElementById("percentageInput").value || 0;
-            filteredData = studentsData.filter(
-              (student) => student.percentage >= percentageLimit
-            );
-          } else if (selectedValue === "Below Limit") {
-            const percentageLimit =
-              document.getElementById("percentageInput").value || 0;
-            filteredData = studentsData.filter(
-              (student) => student.percentage < percentageLimit
-            );
-          }
-
-          let tableHTML = `<table>
+        if(rows != null){
+        let tableHTML = `<table>
                                     <tr>
                                         <th>Register Number</th>
                                         <th>Attendance Percentage</th>
                                     </tr>`;
 
-          filteredData.forEach((student) => {
+          rows.forEach((row) => {
             tableHTML += `<tr>
-                                    <td>${student.regNo}</td>
-                                    <td>${student.percentage}%</td>
+                                    <td>${row.regno}</td>
+                                    <td>${parseFloat((row.percentage).toFixed(3))}%</td>
                                   </tr>`;
           });
 
           tableHTML += `</table>`;
           tablePlaceholder.innerHTML = tableHTML;
-        } else {
-          tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`;
+        }
+        else{
+          tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`
         }
       }
-
       // Function to reset the inputs
       function resetInputs() {
         document.getElementById("fileInput").value = "";

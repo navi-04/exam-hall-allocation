@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Exam Seating Layout</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/lucide.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/SearchModule.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="home-navbar-unique">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img
+            class="home-logo-unique"
+            src="images/fewinfos_logo.png"
+            alt="Fewinfos Logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="SeatingArrangement.html">Create</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="searchmodule.html">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AttendanceModule.html">Attendance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="background-color: rgb(233, 97, 97);" href="login.html">logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <main class="container">
+      <div class="search-container" id="searchContainer">
+        <input
+          type="text"
+          class="search-input"
+          id="searchInput"
+          placeholder="Enter your registration number"
+        />
+      </div>
+
+      <div class="content-container" id="contentContainer">
+        <div id="seatingLayout" class="seating-layout"></div>
+
+        <div id="examDetails" class="exam-details">
+          <h2>Exam Details</h2>
+          <div class="details-grid">
+            <div class="detail-item">
+              <p>Subject</p>
+              <p id="subject"></p>
+            </div>
+            <div class="detail-item">
+              <p>Course Code</p>
+              <p id="courseCode"></p>
+            </div>
+            <div class="detail-item">
+              <p>Date</p>
+              <p id="date"></p>
+            </div>
+            <div class="detail-item">
+              <p>Time</p>
+              <p id="time"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      const registrationToSeat = {
+        "927623BSC01": {
+          courseCode: "MATBCS",
+          seat: "A1",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC02": {
+          courseCode: "MATBCS",
+          seat: "A2",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC03": {
+          courseCode: "MATBCS",
+          seat: "A3",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC04": {
+          courseCode: "MATBCS",
+          seat: "A4",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC05": {
+          courseCode: "MATBCS",
+          seat: "A5",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623BSC06": {
+          courseCode: "MATBCS",
+          seat: "A6",
+          subject: "Math",
+          date: "Jan 22, 2024",
+          time: "9:00 AM - 12:00 PM",
+        },
+        "927623PHY01": {
+          courseCode: "PHY01",
+          seat: "B1",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+        "927623PHY02": {
+          courseCode: "PHY01",
+          seat: "B2",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+        "927623PHY03": {
+          courseCode: "PHY01",
+          seat: "B3",
+          subject: "Physics",
+          date: "Jan 23, 2024",
+          time: "10:00 AM - 1:00 PM",
+        },
+      };
+
+      const rows = 5;
+      const seatsPerRow = 6;
+
+      function createSeatingLayout(highlightSeat) {
+        const layout = document.getElementById("seatingLayout");
+        layout.innerHTML = "";
+
+        for (let i = 0; i < rows; i++) {
+          const row = document.createElement("div");
+          row.className = "row";
+
+          for (let j = 0; j < seatsPerRow; j++) {
+            const seatNumber = `${String.fromCharCode(65 + i)}${j + 1}`;
+            const seat = document.createElement("div");
+            seat.className = `seat ${
+              seatNumber === highlightSeat ? "highlighted" : ""
+            }`;
+            seat.textContent = seatNumber;
+            row.appendChild(seat);
+          }
+
+          layout.appendChild(row);
+        }
+      }
+      document
+        .getElementById("searchInput")
+        .addEventListener("input", (event) => {
+          const regNo = event.target.value;
+          const data = registrationToSeat[regNo];
+          const searchContainer = document.getElementById("searchContainer");
+          const contentContainer = document.getElementById("contentContainer");
+
+          if (data) {
+            searchContainer.classList.add("active");
+            contentContainer.classList.add("active");
+
+            document.getElementById("subject").textContent = data.subject;
+            document.getElementById("courseCode").textContent = data.courseCode;
+            document.getElementById("date").textContent = data.date;
+            document.getElementById("time").textContent = data.time;
+
+            createSeatingLayout(data.seat);
+          } else {
+            searchContainer.classList.remove("active");
+            contentContainer.classList.remove("active");
+          }
+        });
+
+      // Initial seating layout
+      createSeatingLayout();
+
+      const menuItems = document.querySelectorAll(".nav-item");
+      const toggleMenu = document.getElementById("navbarNav");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          toggleMenu.classList.remove("show");
+        });
+      });
+    </script>
+  </body>
+</html>

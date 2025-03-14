@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Attendance Percentage Module</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <link rel="stylesheet" href="styles/AttendanceModule.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="home-navbar-unique">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">
+          <img
+            class="home-logo-unique"
+            src="images/fewinfos_logo.png"
+            alt="Fewinfos Logo"
+          />
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="SeatingArrangement.html">Create</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="searchmodule.html">Search</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="AttendanceModule.html">Attendance</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" style="background-color: rgb(233, 97, 97);" href="login.html">logout</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <div class="container">
+      <!-- Main Content -->
+      <div class="content">
+        <!-- Left panel -->
+        <div class="left-panel">
+          <div class="input-group">
+            <label for="fileInput" class="label">Upload CSV File</label>
+            <input
+              type="file"
+              id="fileInput"
+              class="input-box"
+              accept=".xlsx"
+              onchange="handleFile()"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="percentageInput" class="label"
+              >Set Percentage Limit</label
+            >
+            <input
+              type="number"
+              id="percentageInput"
+              class="input-box"
+              placeholder="Enter percentage limit"
+              min="0"
+              max="100"
+              step="1"
+            />
+          </div>
+
+          <button class="notify-btn"  id="enter" onclick="">
+            Enter
+          </button>
+          <button class="notify-btn" onclick="notifyStudents()">
+            Notify Students
+          </button>
+          <button class="reset-btn" onclick="resetInputs()">Reset</button>
+        </div>
+
+        <!-- Right Panel -->
+        <div class="right-panel">
+          <div class="input-group">
+            <label for="dropdown" class="label">Select Category</label>
+            <select class="dropdown" id="dropdown">
+              <option value="none">None</option>
+              <option value="1">All Students</option>
+              <option value="2">Above Limit</option>
+              <option value="3">Below Limit</option>
+            </select>
+          </div>
+          <div class="table-placeholder" id="tablePlaceholder">
+            <p>Select a category to view student data</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Centered Download Button -->
+      <div class="download-btn-container">
+        <button class="download-btn" onclick="downloadData()">
+          Download Data
+        </button>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+
+document.getElementById("enter").addEventListener("click", async () => {
+    const button = document.getElementById('enter');
+    button.disabled = true;
+
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const percentage = document.getElementById("percentageInput").value;
+
+    if (!file) {
+        alert("Please select an .xlsx file.");
+        button.disabled = false;
+        return;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('percentage', percentage);
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data', {
+            method: 'POST',
+            body: formData
+        });
+
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } 
+});
+
+document.getElementById("dropdown").addEventListener("change", async () => {
+    const selectedOption = document.getElementById('dropdown').value;
+
+    const payload = { selectedOption };
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/attendance_data_2', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload)
+              });
+
+        const result = await response.json();
+        console.log(result.rows)
+        updateTable(result.rows);
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Failed to send data.');
+    } 
+});
+
+
+      let studentsData = [];
+
+      // Function to handle file input (CSV)
+      function handleFile() {
+        const fileInput = document.getElementById("fileInput");
+        const file = fileInput.files[0];
+
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            const csvData = e.target.result;
+            Papa.parse(csvData, {
+              complete: function (results) {
+                // Assuming data has headers: Register Number, Attendance Percentage
+                studentsData = results.data.slice(1).map((row) => ({
+                  regNo: row[0],
+                  percentage: parseFloat(row[1]),
+                }));
+                alert("File loaded successfully!");
+              },
+            });
+          };
+          reader.readAsText(file);
+        }
+      }
+
+      // Function to simulate notifying students
+      function notifyStudents() {
+        const percentageInput = document
+          .getElementById("percentageInput")
+          .value.trim();
+        if (!percentageInput) {
+          alert("Please enter a percentage limit before notifying students.");
+          return;
+        }
+        alert(
+          "Students notified for attendance below " + percentageInput + "%!"
+        );
+      }
+
+      // Function to update table when dropdown changes
+      function updateTable(rows) {
+        const tablePlaceholder = document.getElementById("tablePlaceholder");
+
+        if(rows != null){
+        let tableHTML = `<table>
+                                    <tr>
+                                        <th>Register Number</th>
+                                        <th>Attendance Percentage</th>
+                                    </tr>`;
+
+          rows.forEach((row) => {
+            tableHTML += `<tr>
+                                    <td>${row.regno}</td>
+                                    <td>${parseFloat((row.percentage).toFixed(3))}%</td>
+                                  </tr>`;
+          });
+
+          tableHTML += `</table>`;
+          tablePlaceholder.innerHTML = tableHTML;
+        }
+        else{
+          tablePlaceholder.innerHTML = `<p>Select a category to view student data</p>`
+        }
+      }
+      // Function to reset the inputs
+      function resetInputs() {
+        document.getElementById("fileInput").value = "";
+        document.getElementById("percentageInput").value = "";
+        document.getElementById("dropdown").value = "";
+        document.getElementById(
+          "tablePlaceholder"
+        ).innerHTML = `<p>Select a category to view student data</p>`;
+      }
+
+      // Function to download data
+      function downloadData() {
+        const csv = Papa.unparse(studentsData);
+        const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "attendance_data.csv";
+        link.click();
+      }
+
+      const menuItems = document.querySelectorAll(".nav-item");
+      const toggleMenu = document.getElementById("navbarNav");
+
+      menuItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          toggleMenu.classList.remove("show");
+        });
+      });
+    </script>
+  </body>
+</html>
